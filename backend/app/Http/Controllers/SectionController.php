@@ -33,11 +33,21 @@ class SectionController extends Controller
 
     public function getSection(Request $request, $id){
          
-        $Section =  Section::where('id',$id)->with(['Classes','student'])->get();
+        $Section =  Section::where('id',$id)->with(['Classes'])->get();
   
         return response()->json([
             'message' => $Section,
      
+        ]);
+    }
+
+    public function getAllSection(Request $request){
+            
+        $Section =  Section::find()->with(['Classes'])->get();
+
+        return response()->json([
+            'message' => $Section,
+    
         ]);
     }
 

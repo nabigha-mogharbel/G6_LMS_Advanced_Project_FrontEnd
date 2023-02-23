@@ -22,4 +22,5 @@ Route::Post('/Section',[SectionController::class,'addSection']);
 Route::Get('/Section/{id}',[SectionController::class,'getSection']);
 Route::Patch('/Section/{id}',[SectionController::class,'editSection']);
 Route::delete('/Section/{id}',[SectionController::class,'deleteSection']);
+Route::Get('/Section',[SectionController::class,'getAllSection']);
 
