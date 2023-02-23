@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
-#use App\Models\Section;
+use App\Models\Section;
 use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
@@ -19,13 +19,13 @@ class StudentController extends Controller
         $phone_number=$request->input("phone_number");
         $picture=$request->file('picture')->store('images','public');
         $section_id=$request->input("section_id");
-        #$section=Section::find($section_id);
+        $section=Section::find($section_id);
         $student->first_name=$first_name;
         $student->last_name=$last_name;
         $student->email=$email;
         $student->phone_number=$phone_number;
         $student->picture=$picture;
-      #  $student->section()->associate($section);
+        $student->section()->associate($section);
         $student->save();
         return response()->json([
             'message' => 'Student created successfully!',
