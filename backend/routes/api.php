@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,10 @@ Route::Get("/students", [StudentController::class, "getStudents"]);
 Route::Get("/students/{section_id}", [StudentController::class, "getStudentsBySection"]);
 Route::delete("/students/{id}", [StudentController::class, "deleteStudentById"]);
 Route::Patch("/students/update/{id}", [StudentController::class, "updateStudent"]);
+Route::Post('/sections',[SectionController::class,'addSection']);
+Route::Get('/sections',[SectionController::class,'getAllSection']);
+Route::Get('/sections/{id}',[SectionController::class,'getSection']);
+Route::Patch('/sections/{id}',[SectionController::class,'editSection']);
+Route::delete('/sections/{id}',[SectionController::class,'deleteSection']);
+
+
