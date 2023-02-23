@@ -18,9 +18,10 @@ use App\Http\Controllers\SectionController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::Post('/Section',[SectionController::class,'addSection']);
-Route::Get('/Section/{id}',[SectionController::class,'getSection']);
-Route::Patch('/Section/{id}',[SectionController::class,'editSection']);
-Route::delete('/Section/{id}',[SectionController::class,'deleteSection']);
-Route::Get('/Section',[SectionController::class,'getAllSection']);
+Route::Post('/sections',[SectionController::class,'addSection']);
+Route::Get('/sections',[SectionController::class,'getAllSection']);
+Route::Get('/sections/{id}',[SectionController::class,'getSection']);
+Route::Patch('/sections/{id}',[SectionController::class,'editSection']);
+Route::delete('/sections/{id}',[SectionController::class,'deleteSection']);
+
 
