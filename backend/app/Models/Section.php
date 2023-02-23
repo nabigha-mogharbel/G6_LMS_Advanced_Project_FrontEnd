@@ -18,10 +18,10 @@ class Section extends Model
 
 /*public function classes() {
     return $this->belongsTo(Classes::class);
-}
+}*/
 
 public function students() {
-    return $this->belongsToMany(students::class);
-}*/
+    return $this->hasMany(students::class);
+}
 
 }
