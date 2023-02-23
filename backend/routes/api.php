@@ -19,8 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::Post("/student", [StudentController::class, "addStudent"]);
-Route::Get("/student/{id}", [StudentController::class, "getStudentById"]);
+Route::Post("/students", [StudentController::class, "addStudent"]);
+Route::Get("/students/{id}", [StudentController::class, "getStudentById"]);
 Route::Get("/students", [StudentController::class, "getStudents"]);
 Route::Get("/students/{section_id}", [StudentController::class, "getStudentsBySection"]);
-Route::delete("/student/{id}", [StudentController::class, "deleteStudentById"]);
+Route::delete("/students/{id}", [StudentController::class, "deleteStudentById"]);
+Route::Patch("/students/update/{id}", [StudentController::class, "updateStudent"]);
