@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::Post('/Section',[SectionController::class,'addSection']);
+Route::Get('/Section/{id}',[SectionController::class,'getSection']);
+Route::Patch('/Section/{id}',[SectionController::class,'editSection']);
+Route::delete('/Section/{id}',[SectionController::class,'deleteSection']);
+
