@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
+            $table->string('name')->unique();
+            $table->string('email')->unique();
             $table->string('password');
-            
-
+            $table->unsignedBigInteger('admin_created_id')->nullable();
+            $table->foreign('admin_created_id')->references('id')->on('admins');
             $table->timestamps();
         });
     }

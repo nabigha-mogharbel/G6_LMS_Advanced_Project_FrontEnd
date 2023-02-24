@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Section;
-use App\Models\Class;
+use App\Models\Classes;
 
 use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\Sanctum;
