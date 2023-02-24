@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ClassesController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,6 +37,13 @@ Route::Get('/admins',[AdminController::class,'getAllAdmin']);
 Route::Get('/admins/{id}',[AdminController::class,'getAdmin']);
 Route::Patch('/admins/{id}',[AdminController::class,'editAdmin']);
 Route::delete('/admins/{id}',[AdminController::class,'editAdmin']);
+Route::Post('/classes',[ClassesController::class,'AddClass']);
+Route::Get('/classes',[ClassesController::class,'GetClass']);
+Route::Get('/classes/{id}',[ClassesController::class,'getClassById']);
+Route::delete('/classes/{id}',[ClassesController::class,'deleteClass']);
+Route::Patch('/classes/{id}',[ClassesController::class,'updateClass']);
+
+
 
 
 
