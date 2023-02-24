@@ -19,10 +19,10 @@ class Admin extends Model
     use HasFactory;
 
 public function Admin() {
-    return $this->belongsTo(Admin::class);
+    return $this->belongsTo(self::class, "admin_created_id", "id");
 }
 
 public function Admin_child() {
-    return $this->hasOne(Admin::class);
+    return $this->hasMany(self::class, "id", "admin_created_id");
 }
 }

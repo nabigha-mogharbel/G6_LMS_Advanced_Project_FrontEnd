@@ -10,16 +10,18 @@ class AdminController extends Controller
     public function addAdmin(Request $request){
         $admin = new Admin;
         $name = $request->input('name');
-        $admin_created_id = $request->input('admin_created_id');
-        $admin_child = Admin::find($admin_created_id);
+        if($request->has("admin_created_id")){
+        $admin_created_id = $request->input('admin_created_id');}
         $email=$request->input('email');
         $password = hash::make($request->input('password'));//hashed password :/
         $admin->name=$name;
         $admin->email=$email;
         $admin->password=$password;
-        // $admin->admin_created_id=$admin_created_id;
-        $admin->Admin_child()->associate($admin_child);
-        $admin->save();
+        if($request->has("admin_created_id")){
+            $admin_parent = Admin::find($admin_created_id);
+            $admin->admin_created_id=$admin_created_id;
+            $admin->Admin()->associate($admin_parent);}
+            $admin->save();
         return response()->json([
             'message' => 'Admin created successfully!',
      
@@ -28,8 +30,7 @@ class AdminController extends Controller
     }
 
     public function getAdmin(Request $request, $id){
-         
-        $Admin =  Admin::where('id',$id)->with(['admins'])->get();
+        $Admin =  Admin::where('id',$id)->with(['admin'])->get();
   
         return response()->json([
             'message' => $Admin,
@@ -38,7 +39,7 @@ class AdminController extends Controller
     }
     public function getAllAdmin(Request $request){
             
-        $Admin =  Admin::get();
+        $Admin =  Admin::with(["admin"])->get();
         return response()->json([
             'message' => $Admin,
     
@@ -46,7 +47,6 @@ class AdminController extends Controller
 }
 
         public function deleteAdmin(Request $request, $id){
-         
             $Admin = Admin::find($id);
             $Admin->delete();
             return response()->json([
@@ -57,7 +57,7 @@ class AdminController extends Controller
 
         public function editAdmin(Request $request, $id){
             $Admin =  Admin::find($id);
-            $inputs= $request->all();
+            $inputs= $request->except("_method");
             $Admin->update($inputs);
             return response()->json([
                 'message' => 'Admin edited successfully!',
