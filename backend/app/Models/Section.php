@@ -18,9 +18,9 @@ class Section extends Model
         'content',
     ];
 
-/*public function classes() {
+public function classes() {
     return $this->belongsTo(Classes::class);
-}*/
+}
 
 public function students() {
     return $this->hasMany(Student::class);
