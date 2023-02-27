@@ -26,7 +26,7 @@ class SectionController extends Controller
         $Section->save();
         return response()->json([
             'message' => 'Section created successfully!',
-     
+
         ]);
 
     }
@@ -37,7 +37,7 @@ class SectionController extends Controller
        $Section =  Section::where('id',$id)->get();
         return response()->json([
             'message' => $Section,
-     
+
         ]);
     }
 
@@ -46,12 +46,12 @@ class SectionController extends Controller
         $Section =  Section::get();
         return response()->json([
             'message' => $Section,
-    
+
         ]);
     }
 
     public function deleteSection(Request $request, $id){
-         
+
         $Section = Section::find($id);
         $Section->delete();
         return response()->json([
@@ -67,7 +67,7 @@ class SectionController extends Controller
         return response()->json([
             'message' => 'Section edited successfully!',
             'Section' => $Section,
-     
+
         ]);
    }
 }
