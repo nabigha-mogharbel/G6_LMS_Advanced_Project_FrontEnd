@@ -30,7 +30,7 @@ class AdminController extends Controller
     }
 
     public function getAdmin(Request $request, $id){
-        $Admin =  Admin::where('id',$id)->with(['admin'])->get();
+        $Admin =  Admin::where('id',$id)->with(['Admin'])->get();
   
         return response()->json([
             'message' => $Admin,
@@ -39,7 +39,7 @@ class AdminController extends Controller
     }
     public function getAllAdmin(Request $request){
             
-        $Admin =  Admin::with(["admin"])->get();
+        $Admin =  Admin::with(["Admin"])->get();
         return response()->json([
             'message' => $Admin,
     

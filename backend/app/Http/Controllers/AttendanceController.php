@@ -33,7 +33,7 @@ class AttendanceController extends Controller
 
     }
     public function getAttendance(Request $request, $id){
-        $Attendance =  Attendance::where('id',$id)->with(['Students'],['Sections'])->get();
+        $Attendance =  Attendance::where('id',$id)->with(['Student'],['Section'])->get();
         
          return response()->json([
              'message' => $Attendance,

@@ -39,19 +39,19 @@ class StudentController extends Controller
         ]);
     }
     public function getStudentById(Request $request, $id){
-        $student=Student::find($id)->with(["section"])->get();
+        $student=Student::find($id)->with(["Section"])->get();
         return response()->json([
             "message"=>$student
         ]);
     }
     public function getStudentsBySection(Request $request, $section_id){
-        $students=Student::where("section_id", $section_id)->with(["section"])->get();
+        $students=Student::where("section_id", $section_id)->with(["Section"])->get();
         return response()->json([
             "message" => $students
         ]);
     }
     public function getStudentsByClass(Request $request, $section_id){
-        $students=Student::where("section_id", $section_id)->with(["section"])->get();
+        $students=Student::where("section_id", $section_id)->with(["Section"])->get();
         return response()->json([
             "message" => $students
         ]);

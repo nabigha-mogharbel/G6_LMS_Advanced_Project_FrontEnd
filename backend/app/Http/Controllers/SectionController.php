@@ -22,7 +22,7 @@ class SectionController extends Controller
         $Section->capacity=$capacity;
         $Section->content=$content;
        # $Section->class_id=$class_id;
-        $Section->class()->associate($class);
+        $Section->Class()->associate($class);
         $Section->save();
         return response()->json([
             'message' => 'Section created successfully!',
@@ -33,7 +33,7 @@ class SectionController extends Controller
 
 
     public function getSection(Request $request, $id){
-       $Section =  Section::where('id',$id)->with(['Classes'])->get();
+       $Section =  Section::where('id',$id)->with(['Class'])->get();
        #$Section =  Section::where('id',$id)->get();
         return response()->json([
             'message' => $Section,
@@ -43,7 +43,7 @@ class SectionController extends Controller
 
     public function getAllSection(Request $request){
        # $Section =  Section::get();
-        $Section =  Section::get();
+        $Section =  Section::with(["Class"])->get();
         return response()->json([
             'message' => $Section,
 
