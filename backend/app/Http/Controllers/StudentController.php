@@ -25,7 +25,7 @@ class StudentController extends Controller
         $student->email=$email;
         $student->phone_number=$phone_number;
         $student->picture=$picture;
-        $student->section()->associate($section);
+        $student->Section()->associate($section);
         $student->save();
         return response()->json([
             'message' => 'Student created successfully!',

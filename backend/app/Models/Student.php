@@ -12,10 +12,10 @@ class Student extends Model
 
     protected $fillable=["first_name","last_name", "picture", "email", "phone_number"];
 
-    public function section(){
+    public function Section(){
        return $this->belongsTo(Section::class);
     }
-   public function attendance() {
+   public function Attendance() {
     return $this->hasMany(Attendance::class);
 }
 }

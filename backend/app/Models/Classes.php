@@ -18,6 +18,6 @@ class Classes extends Model
 
 
     public function Section() {
-        return $this->hasOne(Section::class);
+        return $this->hasMany(Section::class);
     }
 }

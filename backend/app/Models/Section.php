@@ -18,14 +18,14 @@ class Section extends Model
         'content',
     ];
 
-public function classes() {
+public function Class() {
     return $this->belongsTo(Classes::class);
 }
 
-public function students() {
+public function Student() {
     return $this->hasMany(Student::class);
 }
-public function attendance() {
+public function Attendance() {
     return $this->hasMany(Attendance::class, "id", "section_id");
 }
 }

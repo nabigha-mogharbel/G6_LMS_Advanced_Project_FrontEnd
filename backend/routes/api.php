@@ -48,7 +48,7 @@ Route::Patch('/classes/{id}',[ClassesController::class,'updateClass']);
 
 Route::Post("/attendance", [AttendanceController::class, "addAttendance"]);
 Route::Get("/attendance/{id}", [AttendanceController::class, "getAttendanceById"]);
-Route::Get("/attendance", [AttendanceController::class, "getAttendance"]);
+Route::Get("/attendance", [AttendanceController::class, "getAllAttendance"]);
 Route::Get("/attendance/{section_id}", [AttendanceController::class, "getAttendanceBySection"]);
 Route::Get("/attendance/{student_id}", [AttendanceController::class, "getAttendanceByStudent"]);
 Route::delete("/attendance/{id}", [AttendanceController::class, "deleteAttendanceById"]);

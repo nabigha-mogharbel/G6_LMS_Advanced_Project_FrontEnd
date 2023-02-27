@@ -22,9 +22,9 @@ class AttendanceController extends Controller
         $Attendance->date=$date;
         $Attendance->status=$status;
         #$Attendance->section_id=$section_id;
-        $Attendance->sections()->associate($section);
+        $Attendance->Section()->associate($section);
         #$Attendance->student_id=$student_id;
-        $Attendance->students()->associate($student);
+        $Attendance->Student()->associate($student);
         $Attendance->save();
         return response()->json([
             'message' => 'Section created successfully!',
@@ -33,9 +33,8 @@ class AttendanceController extends Controller
 
     }
     public function getAttendance(Request $request, $id){
-        $Attendance =  Attendance::where('id',$id)->with(['Students'])->get();
-        $Attendance =  Attendance::where('id',$id)->with(['Sections'])->get();
-        $Attendance=  Attendance::where('id',$id)->get();
+        $Attendance =  Attendance::where('id',$id)->with(['Students'],['Sections'])->get();
+        
          return response()->json([
              'message' => $Attendance,
 
