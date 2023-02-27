@@ -25,7 +25,7 @@ class Section extends Model
 public function students() {
     return $this->hasMany(Student::class);
 }
-/*public function attendance() {
+public function attendance() {
     return $this->hasMany(Attendance::class, "id", "section_id");
-}*/
+}
 }

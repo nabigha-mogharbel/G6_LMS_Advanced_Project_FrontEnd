@@ -17,9 +17,9 @@ class Attendance extends Model
 
     ];
 
- /*   public function sections() {
+    public function sections() {
         return $this->belongsToMany(Section::class, "section_id", "id");
-    }*/
+    }
     public function students() {
         return $this->belongsToMany(Student::class);
     }
