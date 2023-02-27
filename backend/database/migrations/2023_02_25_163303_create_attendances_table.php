@@ -17,9 +17,8 @@ return new class extends Migration
             $table->foreign('section_id')->references('id')->on('sections');
             $table->unsignedBigInteger('student_id');
             $table->foreign('student_id')->references('id')->on('students');
-            $table->date("date");
             $table->string("status");
-            $table->timestamps();
+            $table->date("date");
         });
     }
 

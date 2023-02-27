@@ -53,6 +53,7 @@ Route::Get("/attendance/{section_id}", [AttendanceController::class, "getAttenda
 Route::Get("/attendance/{student_id}", [AttendanceController::class, "getAttendanceByStudent"]);
 Route::delete("/attendance/{id}", [AttendanceController::class, "deleteAttendanceById"]);
 Route::Patch("/attendance/update/{id}", [AttendanceController::class, "updateAttendance"]);
+Route::Get("/attendance/bystudents/{id}", [AttendanceController::class, "getAttendanceByStudent"]);
 
 
 

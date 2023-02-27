@@ -11,16 +11,16 @@ class Attendance extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'date',
-        'status'
+        'status',
+        "date"
 
     ];
 
-    public function Section() {
-        return $this->belongsToMany(Section::class);
+   /* public function Section() {
+        return $this->belongsTo(Section::class);
     }
     public function Student() {
-        return $this->belongsToMany(Student::class);
-    }
+        return $this->belongsTo(Student::class);
+    }*/
 
 }
