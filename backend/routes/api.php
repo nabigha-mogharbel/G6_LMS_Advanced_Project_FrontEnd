@@ -6,6 +6,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\AttendanceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,6 +45,14 @@ Route::delete('/classes/{id}',[ClassesController::class,'deleteClass']);
 Route::Patch('/classes/{id}',[ClassesController::class,'updateClass']);
 
 
+
+Route::Post("/attendance", [AttendanceController::class, "addAttendance"]);
+Route::Get("/attendance/{id}", [AttendanceController::class, "getAttendanceById"]);
+Route::Get("/attendance", [AttendanceController::class, "getAttendance"]);
+Route::Get("/attendance/{section_id}", [AttendanceController::class, "getAttendanceBySection"]);
+Route::Get("/attendance/{student_id}", [AttendanceController::class, "getAttendanceByStudent"]);
+Route::delete("/attendance/{id}", [AttendanceController::class, "deleteAttendanceById"]);
+Route::Patch("/attendance/update/{id}", [AttendanceController::class, "updateAttendance"]);
 
 
 
