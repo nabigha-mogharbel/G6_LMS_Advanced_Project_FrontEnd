@@ -16,11 +16,11 @@ class Attendance extends Model
 
     ];
 
-   /* public function Section() {
+    public function section() {
         return $this->belongsTo(Section::class);
     }
-    public function Student() {
+    public function student() {
         return $this->belongsTo(Student::class);
-    }*/
+    }
 
 }
