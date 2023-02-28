@@ -20,31 +20,23 @@ class AttendanceController extends Controller
         return response()->json(["message" => "attendance record created successfully"]);
     }
 
-    public function getAttendance(Request $request, $id){
+   /* public function getAttendance(Request $request, $id){
         $Attendance =  Attendance::where('id',$id)->with(['Student'],['Section'])->get();
          return response()->json([
              'message' => $Attendance,
 
          ]);
-     }
-     public function getAttendanceByStudent(Request $request, $id){
-        $student=Student::find($id);
-        /*$section=$student->Attendance->pluck("id");
+     }*/
+     public function getAttendanceById(Request $request, $id){
+        $Attendance = Attendance::with("student", "section")->find($id);
         return response()->json([
-            'message' => $section,
-
-        ]);*/
-        /*foreach ($student->Attendance as $sections) {
-            $sections->pivot->section_id;
-        }*/
-        $relatedSections=$student->Attendance->first();
-        return response()->json([
-            "message"=>$relatedSections
+            "message"=>$Attendance
         ]);
      }
 
      public function getAllAttendance(Request $request){
-         $Attendance =  Attendance::get();
+         #$Attendance =  Attendance::get();
+         $Attendance=Attendance::with(["student", "section"])->get();
          return response()->json([
              'message' => $Attendance,
 
@@ -66,6 +58,20 @@ class AttendanceController extends Controller
             'Attendance' => $Attendance,
 
         ]);
+   }
+   public function getAttendanceByStudent(Request $request, $id){
+    $attendance=Attendance::where("student_id", $id)->with("student", "section")->get();
+    return response()->json([
+        "message"=> "Records fro zis student",
+        "Atendance"=>$attendance
+    ]);
+   }
+   public function getAttendanceBySection(Request $request, $id){
+    $attendance=Attendance::where("section_id", $id)->with("student", "section")->get();
+    return response()->json([
+        "message"=> "Records fro zis student",
+        "Atendance"=>$attendance
+    ]);
    }
 
 }
