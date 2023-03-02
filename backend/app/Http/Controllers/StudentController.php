@@ -33,7 +33,7 @@ class StudentController extends Controller
         ]);
     }
     public function getStudents(Request $request){
-        $students=Student::with(["section"])->get();
+        $students=Student::with(["section"])->paginate(5);
         return response()->json([
             "message"=>$students
         ]);

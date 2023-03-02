@@ -32,7 +32,7 @@ class SectionController extends Controller
     }
 
 
-    public function getSection(Request $request, $id){
+    public function getSection($id){
        $Section =  Section::where('id',$id)->with(['Class'])->get();
        #$Section =  Section::where('id',$id)->get();
         return response()->json([
@@ -41,11 +41,22 @@ class SectionController extends Controller
         ]);
     }
 
+    public function getSectionByname($name){
+        
+        $Section = Section::where('name',$name)->with(['Class'])->paginate(10);
+        
+         return response()->json([
+             'message' => $Section,
+             'inpute' => $name,
+ 
+         ]);
+     }
+
     public function getAllSection(Request $request){
        # $Section =  Section::get();
-        $Section =  Section::with(["Class"])->get();
+        $Section =  Section::with(["Class"])->paginate(5);
         return response()->json([
-            'message' => $Section,
+            'message' => $Section, 
 
         ]);
     }

@@ -24,7 +24,7 @@ class ClassesController extends Controller
 
         public function  GetClass(Request $request){
 
-            $class= Classes::get();
+            $class= Classes::paginate(5);
             return response()->json([
                 "message"=>$class]);
 

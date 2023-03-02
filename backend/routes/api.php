@@ -7,6 +7,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,6 +32,11 @@ Route::Patch("/students/update/{id}", [StudentController::class, "updateStudent"
 Route::Post('/sections',[SectionController::class,'addSection']);
 Route::Get('/sections',[SectionController::class,'getAllSection']);
 Route::Get('/sections/{id}',[SectionController::class,'getSection']);
+
+
+Route::Get('/sections/name/{name}',[SectionController::class,'getSectionByname']);
+
+
 Route::Patch('/sections/{id}',[SectionController::class,'editSection']);
 Route::delete('/sections/{id}',[SectionController::class,'deleteSection']);
 Route::Post('/admins',[AdminController::class,'addAdmin']);
@@ -43,6 +49,7 @@ Route::Get('/classes',[ClassesController::class,'GetClass']);
 Route::Get('/classes/{id}',[ClassesController::class,'getClassById']);
 Route::delete('/classes/{id}',[ClassesController::class,'deleteClass']);
 Route::Patch('/classes/{id}',[ClassesController::class,'updateClass']);
+// getSectionByname
 
 
 
@@ -53,9 +60,18 @@ Route::Get("/attendance/section/{section_id}", [AttendanceController::class, "ge
 Route::Get("/attendance/student/{student_id}", [AttendanceController::class, "getAttendanceByStudent"]);
 Route::delete("/attendance/{id}", [AttendanceController::class, "deleteAttendanceById"]);
 Route::Patch("/attendance/update/{id}", [AttendanceController::class, "updateAttendance"]);
-#Route::Get("/attendance/bystudents/{id}", [AttendanceController::class, "getAttendanceByStudent"]);
+Route::Get("/attendance/bystudents/date/{date}", [AttendanceController::class, "getAttendanceBydate"]);
 
 
-
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function ($router) {
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/refresh', [AuthController::class, 'refresh']);
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+});
 
 

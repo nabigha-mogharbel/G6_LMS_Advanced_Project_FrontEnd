@@ -36,7 +36,7 @@ class AttendanceController extends Controller
 
      public function getAllAttendance(Request $request){
          #$Attendance =  Attendance::get();
-         $Attendance=Attendance::with(["student", "section"])->get();
+         $Attendance=Attendance::with(["student", "section"])->paginate(5);
          return response()->json([
              'message' => $Attendance,
 
@@ -73,5 +73,11 @@ class AttendanceController extends Controller
         "Atendance"=>$attendance
     ]);
    }
-
+   public function getAttendanceBydate(Request $request, $date){
+    $attendance=Attendance::where("date", $date)->with("student", "section")->get();
+    return response()->json([
+        "message"=> "date fro zis student",
+        "Atendance"=>$attendance
+    ]);
+}
 }
