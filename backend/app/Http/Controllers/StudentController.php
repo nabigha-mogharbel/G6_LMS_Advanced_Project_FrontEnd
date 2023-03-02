@@ -9,7 +9,9 @@ use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
-   
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
     //
     public function addStudent(Request $request){
         $student= new Student;
