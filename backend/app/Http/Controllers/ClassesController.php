@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 class ClassesController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
     public function AddClass(Request $request){
         $class= new Classes();
         $name = $request->input('name');

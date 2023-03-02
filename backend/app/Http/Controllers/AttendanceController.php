@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
     public function addAttendance(Request $request){
         $section_id = $request->input('section_id');
         $student_id = $request->input('student_id');

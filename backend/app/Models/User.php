@@ -53,4 +53,12 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }    
+
+    public function Admin() {
+        return $this->belongsTo(self::class, "admin_created_id", "id");
+    }
+    
+    public function Admin_child() {
+        return $this->hasMany(self::class, "id", "admin_created_id");
+    }
 }

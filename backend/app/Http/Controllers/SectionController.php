@@ -11,6 +11,9 @@ use Laravel\Sanctum\Sanctum;
 
 class SectionController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth:api');
+    }
     public function addSection(Request $request){
         $Section = new Section;
         $name = $request->input('name');
