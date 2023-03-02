@@ -58,8 +58,13 @@ class AdminController extends Controller
 
         public function editAdmin(Request $request, $id){
             $Admin =  Admin::find($id);
-            $inputs= $request->except("_method");
+            $inputs= $request->except("password","_method");
             $Admin->update($inputs);
+            if ($request->has('password')) {
+                $password = $request->input('password');
+                echo $password;
+                $Admin->update(['password' => bcrypt($password)]);
+            }
             return response()->json([
                 'message' => 'Admin edited successfully!',
                 'Admin' => $Admin,
