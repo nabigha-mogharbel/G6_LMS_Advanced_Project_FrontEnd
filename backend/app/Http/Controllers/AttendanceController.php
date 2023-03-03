@@ -23,13 +23,6 @@ class AttendanceController extends Controller
         return response()->json(["message" => "attendance record created successfully"]);
     }
 
-   /* public function getAttendance(Request $request, $id){
-        $Attendance =  Attendance::where('id',$id)->with(['Student'],['Section'])->get();
-         return response()->json([
-             'message' => $Attendance,
-
-         ]);
-     }*/
      public function getAttendanceById(Request $request, $id){
         $Attendance = Attendance::with("student", "section")->find($id);
         return response()->json([

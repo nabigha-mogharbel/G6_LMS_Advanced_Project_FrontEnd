@@ -11,8 +11,7 @@ class Classes extends Model
 
     protected $fillable = [
         'name',
-        'description',
-        'picture',
+        'floor'
     ];
     use HasFactory;
 
