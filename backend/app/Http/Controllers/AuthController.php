@@ -40,6 +40,15 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:6',
+            "name" => "required|string",
+            "admin_created_id" => "numeric"
+        ]);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
         $admin = new User;
         $name = $request->input('name');
         if($request->has("admin_created_id")){
@@ -51,13 +60,19 @@ class AuthController extends Controller
         $admin->password=$password;
         if($request->has("admin_created_id")){
             $admin_parent = User::find($admin_created_id);
+            if(empty($admin_parent)){
+                return response()->json([
+                    'message' => "Admin doesn't exists",
+             
+                ], 400);
+            }
             $admin->admin_created_id=$admin_created_id;
             $admin->Admin()->associate($admin_parent);}
             $admin->save();
         return response()->json([
             'message' => 'Admin created successfully!',
      
-        ]);
+        ], 201);
     }
 
     /**
@@ -98,15 +113,20 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
-        ]);
+        ], 200);
     }
     public function getAdmin(Request $request, $id){
         $Admin =  User::where('id',$id)->with(['Admin'])->get();
-  
+        if($Admin->isEmpty()){
+            return response()->json([
+                'message' => "Admin doesn't exists",
+         
+            ], 400);
+        }
         return response()->json([
             'message' => $Admin,
      
-        ]);
+        ], 200);
     }
     public function getAllAdmin(Request $request){
             
@@ -114,25 +134,59 @@ class AuthController extends Controller
         return response()->json([
             'message' => $Admin,
     
-        ]);
+        ], 200);
 }
 
         public function deleteAdmin(Request $request, $id){
-            $Admin = User::find($id);
-            $Admin->delete();
+            $admin = User::find($id);
+                if(empty($admin)){
+                    return response()->json([
+                        'message' => "Admin doesn't exists",
+                    ], 400);
+                }
+            $admin->delete();
             return response()->json([
                 'message' => 'Admin deleted Successfully!',
-            ]);
+            ], 200);
         }
 
 
         public function editAdmin(Request $request, $id){
-            $Admin =  User::find($id);
-            $inputs= $request->except("_method");
-            $Admin->update($inputs);
-            return response()->json([
-                'message' => 'Admin edited successfully!',
-                'Admin' => $Admin,
+            $admin =  User::find($id);
+            if(empty($admin)){
+                return response()->json([
+                    'message' => "Admin doesn't exists",
+             
+                ], 400);
+            }
+            $inputs= $request->except("_method", "password");
+            $validator = Validator::make($request->all(), [
+                'email' => 'email|unique:users',
+                'password' => 'string|min:6',
+                "name" => "string",
+                "admin_created_id" => "numeric"
             ]);
+            if ($validator->fails()) {
+                return response()->json($validator->errors(), 422);
+            }
+            if($request->has("admin_created_id")){
+                $admin_parent = User::find($request->input("admin_created_id"));
+                if(empty($admin_parent)){
+                    return response()->json([
+                        'message' => "Parent Admin doesn't exists",
+                 
+                    ], 400);
+                }
+                $admin->admin_created_id=$admin_parent;
+                $admin->Admin()->associate($admin_parent);}
+            $admin->update($inputs);
+            if($request->has('password')){
+                $newpass = hash::make($request->input('password'));//hashed password :/
+                $admin->update(["password" => $newpass]);
+            }
+            return response()->json([
+                'message' => 'admin edited successfully!',
+                'admin' => $admin,
+            ], 200);
         }
 }

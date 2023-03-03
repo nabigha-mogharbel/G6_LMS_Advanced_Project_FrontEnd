@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Models\Section;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Validator;
 class StudentController extends Controller
 {
     public function __construct() {
@@ -14,6 +14,15 @@ class StudentController extends Controller
     }
     //
     public function addStudent(Request $request){
+        $validated=Validator::make($request->all(), [
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'phone_number' => 'required|numeric',
+            "email" => "required|email"
+        ]);
+        if($validated->fails()){
+            return response()->json(["message"=>$validated->errors()]);
+        }
         $student= new Student;
         $first_name=$request->input("first_name");
         $last_name=$request->input("last_name");
@@ -42,6 +51,12 @@ class StudentController extends Controller
     }
     public function getStudentById(Request $request, $id){
         $student=Student::find($id)->with(["Section"])->get();
+        if($student->isEmpty()){
+            return response()->json([
+                'message' => "Student doesn't exists",
+         
+            ], 400);
+        }
         return response()->json([
             "message"=>$student
         ]);
@@ -61,6 +76,12 @@ class StudentController extends Controller
 
     public function deleteStudentById(Request $request, $id){
         $student=Student::find($id);
+        if(empty($student)){
+            return response()->json([
+                'message' => "Student doesn't exists",
+         
+            ], 400);
+        }
         $student->delete();
         return response()->json([
             "message"=> "Student Deleted Successfully!"
@@ -68,6 +89,12 @@ class StudentController extends Controller
     }
     public function updateStudent(Request $request, $id){
          $student=Student::find($id);
+         if(empty($student)){
+            return response()->json([
+                'message' => "Student doesn't exists",
+         
+            ], 400);
+        }
         $inputs=$request->except("picture", "_method");
         if($inputs){ $student->update($inputs);}
         if($request->hasFile("picture")){
