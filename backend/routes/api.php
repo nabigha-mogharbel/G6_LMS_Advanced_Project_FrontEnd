@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SectionController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;

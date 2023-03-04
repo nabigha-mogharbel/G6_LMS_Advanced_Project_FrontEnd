@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("phone_number");
             $table->string("picture");
             $table->unsignedBigInteger("section_id");
-            $table->foreign("section_id")->references("id")->on("sections")->onDelete("cascade");
+            $table->foreign("section_id")->references("id")->on("sections");
             $table->timestamps();
         });
     }

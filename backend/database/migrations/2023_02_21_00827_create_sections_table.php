@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('class_id');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');
-            $table->string('capacity');
-            $table->string('content');
+            $table->integer('capacity');
             $table->timestamps();
         });
     }
