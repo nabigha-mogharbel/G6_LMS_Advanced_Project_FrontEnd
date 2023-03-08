@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+            $table->boolean('role')->default(false);
             $table->unsignedBigInteger('admin_created_id')->nullable();
             $table->foreign('admin_created_id')->references('id')->on('users');
             $table->timestamps();

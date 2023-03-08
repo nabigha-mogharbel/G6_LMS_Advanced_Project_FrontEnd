@@ -18,6 +18,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
+
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
@@ -26,7 +27,6 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::Get('/admins', [AuthController::class, 'getAllAdmin']);
     Route::Get('/admins/{id}', [AuthController::class, 'getAdmin']);
     Route::Patch('/admins/{id}', [AuthController::class, 'editAdmin']);
     Route::delete('/admins/{id}', [AuthController::class, 'deleteAdmin']);

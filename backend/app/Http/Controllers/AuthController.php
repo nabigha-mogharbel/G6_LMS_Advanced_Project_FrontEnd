@@ -22,6 +22,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
+        $email=$request->input('email');
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -29,10 +30,17 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this->createNewToken($token);
+        $admin=User::find($email)->get();
+        if($admin->role==="superadmin"){
+            $email=$admin->email;
+            return $this->createNewTokens($token, true, $email);
+        } else{
+            $email=$admin->email;
+        return $this->createNewToken($token, false, $email);}
     }
     /**
      * Register a admin.
@@ -54,10 +62,12 @@ class AuthController extends Controller
         if($request->has("admin_created_id")){
         $admin_created_id = $request->input('admin_created_id');}
         $email=$request->input('email');
+        $role=$request->input('role');
         $password = hash::make($request->input('password'));//hashed password :/
         $admin->name=$name;
         $admin->email=$email;
         $admin->password=$password;
+        $admin->role=$role;
         if($request->has("admin_created_id")){
             $admin_parent = User::find($admin_created_id);
             if(empty($admin_parent)){
@@ -90,7 +100,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function refresh() {
-        return $this->createNewToken(auth()->refresh());
+        return $this->createNewToken(auth()->refresh(),false,"");
     }
     /**
      * Get the authenticated User.
@@ -107,12 +117,14 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function createNewToken($token){
+    protected function createNewToken($token, $role, $email){
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => auth()->user(),
+            'email' => $email,
+            "isSuperAdmin" => $role,
         ], 200);
     }
     public function getAdmin(Request $request, $id){
@@ -164,6 +176,7 @@ class AuthController extends Controller
                 'email' => 'email|unique:users',
                 'password' => 'string|min:6',
                 "name" => "string",
+               " role "=> "boolean",
                 "admin_created_id" => "numeric"
             ]);
             if ($validator->fails()) {
