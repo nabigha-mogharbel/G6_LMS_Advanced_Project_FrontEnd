@@ -1,10 +1,5 @@
+import React from "react";
 
-import React from 'react'
-
-export default function students_page() {
-  return (
-    <div>students_page</div>
-  )
+export default function Students_page() {
+  return <div>students_page</div>;
 }
-
-
