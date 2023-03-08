@@ -22,7 +22,7 @@ class AuthController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
-        $email=$request->input('email');
+        
     	$validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string|min:6',
@@ -34,8 +34,9 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        $admin=User::find($email)->get();
-        if($admin->role==="superadmin"){
+        $email=$request->input('email');
+        $admin=User::where('email',$email)->first();
+        if($admin->role==1){
             $email=$admin->email;
             return $this->createNewTokens($token, true, $email);
         } else{
@@ -165,7 +166,18 @@ class AuthController extends Controller
 
         public function editAdmin(Request $request, $id){
             $admin =  User::find($id);
+            $email=$request->header('email');
+
+
+            $admins=User::where('email', $email)->first();
+            if($admins->role==0){
+                return response()->json([
+                    'message' => "you are not super admins",
+                ], 400);
+            }
+            else {
             if(empty($admin)){
+
                 return response()->json([
                     'message' => "Admin doesn't exists",
              
@@ -202,4 +214,4 @@ class AuthController extends Controller
                 'admin' => $admin,
             ], 200);
         }
-}
+}}
