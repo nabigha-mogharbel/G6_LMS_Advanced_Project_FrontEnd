@@ -1,8 +1,6 @@
-import React from 'react';
+import React from "react";
 import axios from "axios";
 
-export default function new_Classe() {
-  return (
-    <div>new_classes</div>
-  )
+export default function New_classe() {
+  return <div>new_classes</div>;
 }
