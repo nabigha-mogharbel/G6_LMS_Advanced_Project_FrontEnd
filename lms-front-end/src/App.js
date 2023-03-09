@@ -2,7 +2,7 @@ import "./App.css";
 import React, { Component } from "react";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import  Login  from "./pages/login";
+import LoginPage  from "./pages/login/login";
 import Students from "./pages/students/student";
 import Classes from "./pages/classes/classes";
 import Section from "./pages/sections/section"
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
       <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard/" element={<Container />}>
         <Route
           path="students"
