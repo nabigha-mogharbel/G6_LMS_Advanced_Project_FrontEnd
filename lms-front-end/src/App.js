@@ -10,7 +10,8 @@ import Admin from "./pages/Admins/admin";
 import Container from "./pages/container/index"
 import Attendance from "./pages/Attendance"
 import Report from "./pages/repport"
-import Dashboard from "./pages/dashboard"
+import Dashboard from "./pages/dashboard/dashboard"
+
 function App() {
   return (
     <div className="App">
@@ -24,6 +25,8 @@ function App() {
           path="students"
           element={<Students />}
         />
+        <Route path="main"
+        element={<Dashboard/>}/>
         <Route
           path="classes"
           element={<Classes />}

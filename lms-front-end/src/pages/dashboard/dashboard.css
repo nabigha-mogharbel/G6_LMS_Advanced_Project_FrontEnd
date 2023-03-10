@@ -1,0 +1,39 @@
+.card-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: calc(76px + 16px - 39px) ;
+}
+.dashboard{
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.dashboard h1{
+    align-self: flex-start;
+    margin-left: 1rem;
+}
+@media only screen and (min-width:769px) {
+    .dashboard{
+        height:100vh;
+        width:calc(100vw - 160px);
+    }
+}
+@media only screen and (min-width:1025px){
+    .dashboard{
+        height:100vh;
+        width:calc(100vw - 240px);
+    }
+}
+@media screen and (max-width: 480px){
+    .dashboard{
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width:768px) and (min-width:481px) {
+    .dashboard{
+        margin-left: 40px;
+    }
+}

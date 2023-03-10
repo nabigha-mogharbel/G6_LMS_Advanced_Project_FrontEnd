@@ -1,0 +1,122 @@
+.sidebar .link{
+    transition: color 0.5s ease;
+    color:#252B42;
+    font-size: larger;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+
+}
+.sidebar .tab{
+    transition: background-color 0.5s ease-in-out;
+    padding: 1rem;
+}
+.sidebar .tab_active, .sidebar .tab_hover{
+    background-color: var(--purple);
+}
+.sidebar .link_active{
+    color:var(--white);
+}
+.sidebar{
+    background: var(--white);
+    box-sizing: border-box;
+    padding-top: 1rem;
+    box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+}
+@media screen and (max-width: 768px){
+    .sidebar{
+        position: fixed;
+        z-index: 10;
+        width:40px;
+        transition: width 0.3s ease-in-out;
+        overflow: clip;
+        height:100vh;
+    }
+    .sidebar .tab{
+        padding-left: 40px;}
+    #logo{
+        display: none;
+    }
+    .sidebar_full{
+        width:120px;
+        padding-left: 0;
+    }
+    .tab_hidden{
+        display: none;
+    }
+}
+
+/*@media screen and (max-width:768px) and (min-width:481px) {
+    .sidebar{
+        position: fixed;
+        z-index: 10;
+        background-color: rgb(27, 169, 81);
+        width:40px;
+    }
+}*/
+@media only screen and (min-width:769px) {
+    .sidebar{
+        height:100vh;
+        width:160px;
+        box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+    }
+    .toggler{
+        display: none;
+    }
+}
+@media only screen and (min-width:1025px){
+    .sidebar .link{
+
+    }
+    .toggler{
+        display: none;
+    }
+    .sidebar{
+        height:100vh;
+        width:240px;
+        box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+    }
+}
+/*@media screen and (max-width: 480px){
+    .sidebar{
+        background-color: red;
+        width:100vw;
+        height:100px;
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
+    .sidebar_full{
+
+    }
+    .tab_hidden{
+        display: none;
+    }
+}
+
+@media screen and (max-width:768px) and (min-width:481px) {
+    .sidebar{
+        background-color: rgb(27, 169, 81);
+        width:100vw;
+        position: sticky;
+        top: 0;
+        left: 0;
+    }
+}
+@media only screen and (min-width:769px) {
+    .sidebar{
+        height:100vh;
+        width:160px;
+        box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+    }
+}
+@media only screen and (min-width:1025px){
+    .sidebar .link{
+
+    }
+    .sidebar{
+        height:100vh;
+        width:240px;
+        box-shadow: 4px 0px 4px rgba(0, 0, 0, 0.25);
+    }
+}*/
