@@ -1,0 +1,19 @@
+.dashboard-wrapper{
+    margin: 0;
+    padding:0;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+}
+@media only screen and (min-width:769px) {
+    .dashboard-wrapper{
+        display: flex;
+        flex-direction: row;
+    }
+}
+@media only screen and (min-width:1025px){
+    .dashboard-wrapper{
+        display: flex;
+        flex-direction: row;
+    }
+}

@@ -1,0 +1,12 @@
+.card{
+    width:240px;
+    height:240px;
+    opacity: 0.6;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.card:hover{
+    opacity:1;
+}
