@@ -6,8 +6,8 @@ function Dashboard() {
     let date = new Date();
     let year = date.getFullYear();
     let month = date.getMonth();
-    let day=date.getDay()
-    console.log(day);
+    let day=date.getDay();
+    let dayDate=date.getDate();
     switch (month) {
       case 0:
         month = "January";
@@ -67,13 +67,13 @@ function Dashboard() {
           case 6:
             day = "Saturday";
             break;
-          case 7:
+          case 0:
             day = "Sunday";
             break;
             default:
                 day="day"
     }
-    let string = day + ", "  +" "+ month +" " + year;
+    let string = day + ", "  +" "+ dayDate+ " "+ month +" " + year;
     return string;
   }
   return (<div className="dashboard">

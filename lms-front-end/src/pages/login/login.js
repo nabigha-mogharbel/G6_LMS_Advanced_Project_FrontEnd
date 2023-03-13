@@ -18,7 +18,8 @@ export default function LoginPage() {
       .then(response => {
         const cookies = new Cookies();
         cookies.set("access_token", response.data.access_token, { path: "/" });
-        console.log("Token saved to cookie:", response.data.access_token);
+        window.location.assign("/dashboard")
+        //console.log("Token saved to cookie:", response.data.access_token);
         // redirect to the dashboard or the next page after successful login
       })
       .catch(error => {
@@ -28,7 +29,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container">
+    <div className="login container">
       <div className="login-content">
         <div className="login-form">
           <div className="login-form-title">

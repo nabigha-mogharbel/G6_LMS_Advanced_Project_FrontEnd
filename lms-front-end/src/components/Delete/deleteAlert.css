@@ -1,0 +1,9 @@
+.delete-alert{
+    width:240px;
+    height:240px;
+    position: absolute;
+    transition: opacity 0.3 ease-in;
+    z-index: 12;
+    left:calc(50vw - 120px);
+    top:calc(50vh - 120px);
+}

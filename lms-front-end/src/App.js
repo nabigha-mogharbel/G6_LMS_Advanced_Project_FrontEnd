@@ -1,31 +1,35 @@
 import "./App.css";
-import React, { Component } from "react";
+import React, { createContext, useContext } from "react";
 import { AuthCheck } from "./auth";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cookies from "universal-cookie";
 import LoginPage  from "./pages/login/login";
-import Students from "./pages/students/student";
-import Classes from "./pages/classes/classes";
-import Section from "./pages/sections/section"
-import Admin from "./pages/Admins/admin";
+import Students from "./pages/students/wrapper";
+import Classes from "./pages/classes/wrapper";
+import Section from "./pages/sections/wrapper"
+import Admin from "./pages/Admins/admin_page";
 import Container from "./pages/container/index"
 import Attendance from "./pages/Attendance"
 import Report from "./pages/repport"
 import Dashboard from "./pages/dashboard/dashboard"
 
-function App() {
+  function App() {
+    const TokenContext=createContext("")
+const cookies = new Cookies();
+const authToken = cookies.get("access_token") || "";
   return (
+  <TokenContext.Provider value={authToken}>
     <div className="App">
       <BrowserRouter>
       <Routes>
         
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/dashboard" element={<AuthCheck><Dashboard/></AuthCheck>} />
-      <Route path="/dashboard/" element={ <AuthCheck><Container /></AuthCheck>}>
+      <Route path="/dashboard/" element={ <Container />}>
         <Route
           path="students"
           element={<Students />}
         />
-        <Route path="main"
+        <Route path=""
         element={<Dashboard/>}/>
         <Route
           path="classes"
@@ -51,6 +55,7 @@ function App() {
     </Routes>
       </BrowserRouter>
     </div>
+    </TokenContext.Provider>
   );
 }
 
