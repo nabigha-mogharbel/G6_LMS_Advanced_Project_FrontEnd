@@ -9,7 +9,7 @@ export default function EditClass(props){
     const adminName=useRef();
     const email=useRef();
     const password=useRef();
-    let inputColor="#"+data.color
+  
     useEffect(() => {
         const cookies = new Cookies();
       const authToken = cookies.get("access_token");
@@ -37,7 +37,7 @@ export default function EditClass(props){
         const URL=process.env.REACT_APP_BASE_URL;
         let newData={"_method":"patch"};
         console.log(newData)
-        const submit =axios.post(`${URL}cadmins/${props.index}`, newData,
+        const submit =axios.post(`${URL}cadmins/${props.index}`,newData,
          config
         )
           .then(function (response) {
