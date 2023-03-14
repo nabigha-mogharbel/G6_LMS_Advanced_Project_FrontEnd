@@ -5,6 +5,7 @@ import "./index.css"
 export default function Container() {
   const [dimmed, setDimmed]=useState(false)
   const shaddowHandler=() => {
+    console.log("dimm", dimmed)
     setDimmed(!dimmed)
   }
   return (
