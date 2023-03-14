@@ -14,11 +14,17 @@ body {
 }
 h1,h1,h3,h4,h5,h6{
   font-family: 'Montserrat', sans-serif;
-color:#252B42
+color:var(--black)
 }
 :root{
   --purple:#8A70D6;
+  --purple-lght:#E9E3FE;
   --white:#FCFBFC;
+  --black:#252B42;
+  --orange:#FFA600;
+  --orange-lght:#FFEFB3;
+  --blue:#579BE4;
+  --blue-lght:#E5F3FE;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
