@@ -22,7 +22,7 @@ function Sidebar(props) {
         }*/
         if(swicther==="on"){
             event.target.className="tab tab_active";
-            event.target.children[0].className="link link_active"
+            event.target.children[0].className="link link_active";
         }else if(swicther==="off"){
             event.target.className="tab";
             //console.log(event.target.children)
