@@ -18,7 +18,7 @@ export default function NewSection(props) {
     "capacity":Capacity.current.value,
     "class_id":class_id.current.value,
   }
-    const submit =axios.post(`${URL}sections`, data,
+    const submit =axios.post(`${URL}sections`,data,
      config
     )
       .then(function (response) {

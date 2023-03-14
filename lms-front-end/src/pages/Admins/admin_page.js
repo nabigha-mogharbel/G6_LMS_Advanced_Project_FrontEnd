@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from "axios";
 
-export default function Admin() {
+export default function AdminPage(props) {
   return (
-    <div>admin</div>
+    <div>new_Admin {props.index} <button onClick={props.cancel} >back</button></div>
   )
 }
