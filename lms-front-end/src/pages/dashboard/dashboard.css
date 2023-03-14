@@ -18,6 +18,7 @@
     .dashboard{
         height:100vh;
         width:calc(100vw - 160px);
+        box-sizing: border-box;
     }
 }
 @media only screen and (min-width:1025px){

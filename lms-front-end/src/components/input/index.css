@@ -1,0 +1,12 @@
+.input-label{
+    position: relative;
+}
+.input-label::before{
+       position: absolute;
+        top: -8px;
+        left: 10px;
+        font-size: 14px;
+        color: #111;
+        background-color: #fff;
+        z-index: 1;
+}

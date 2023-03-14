@@ -26,7 +26,7 @@
    margin-top: 40px;
 } 
 
-.container {
+.login.container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,10 +57,14 @@
 }
 
 .login-form-content input {
-    padding: 10px;
+    padding: 1rem;
     width: 100%;
+    box-sizing: border-box;
     border-radius: 6px;
     border: 1px solid #999;
+}
+.login-form-button{
+    width:100%;
 }
 
 .login-form-content button {
@@ -113,10 +117,11 @@
     }
 }
 @media (max-width:480px){
-    .container{
+    .login .container{
         height: 100vh;
     }
     .login-content{
         height: 100%;
+        margin: 0;
     }
 }

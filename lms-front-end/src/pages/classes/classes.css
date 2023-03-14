@@ -1,0 +1,74 @@
+.Classes-th{
+    color:var(--purple);
+}
+.Classes-th, .Classes-td{
+    padding: 0.6rem 1rem;
+}
+.dashboard input, .dashboard select{
+    border-radius: 6px;
+    border: 1px solid #999;
+    padding:0.6rem 1rem;
+    height:2rem;
+    box-sizing: border-box;
+}
+.dash-container{
+    display: flex;
+}
+table{
+    border-collapse: collapse;
+  border-spacing: 0;
+  width: calc(100% - 2rem);
+  border: 1px solid #ddd;
+}
+.container-col{
+    flex-direction: column;
+}
+.container-row{
+    flex-direction: row;
+}
+.container-row-to-col{
+    flex-direction: row;
+}
+.dash-container-scroll{
+    display: block;
+    overflow-x: auto;
+}
+.Classes-th.filtered{
+    color:orange;
+}
+.table-paginator{
+    display: flex;
+    flex-direction: row;
+}
+.table-paginator div{
+    border: #999 1px solid;
+    cursor: pointer;
+    padding: 0.6rem 1rem;
+}
+.table-paginator div:first-child{
+    border-radius:  6px 0 0 6px;
+}
+.table-paginator div:last-child{
+    border-radius:  0 6px  6px 0;
+}
+.table-paginator div:hover, .table-paginator .active{
+    background-color:var(--purple);
+    color:white;
+
+}
+@media screen and (max-width: 768px){
+    .container-row-to-col{
+        flex-direction: column;
+    }
+    .table-container-scroll{
+        overflow-x: auto;
+    }
+    .dashboard input, select{
+        width:80%;
+    }
+        /*tbody {
+            display: block;
+            overflow: scroll;
+        }*/
+    
+}

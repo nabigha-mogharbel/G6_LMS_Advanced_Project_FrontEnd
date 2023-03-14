@@ -1,0 +1,32 @@
+.pop-up {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    z-index: 12;
+    left: calc(50vw - 120px);
+    top: calc(50vh - 120px);
+    overflow: scroll;
+    background-color: white;
+    justify-content: center;
+
+}
+.pop-up form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    justify-content: center;
+
+}
+.pop-up input{
+    width:70%;
+    padding: 0.6rem 1rem;
+    box-sizing: border-box;
+}
+.pop-up .dash-container{
+    align-items: flex-start;
+    row-gap: 0.6rem;
+}
