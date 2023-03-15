@@ -7,7 +7,7 @@ import LoginPage  from "./pages/login/login";
 import Students from "./pages/students/wrapper";
 import Classes from "./pages/classes/wrapper";
 import Section from "./pages/sections/wrapper"
-import Admin from "./pages/Admins/admin_page";
+import Admin from "./pages/Admins/wrapper";
 import Container from "./pages/container/index"
 import Attendance from "./pages/Attendance"
 import Report from "./pages/repport"
