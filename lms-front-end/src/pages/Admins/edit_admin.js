@@ -38,7 +38,7 @@ export default function EditClass(props){
         let newData={"_method":"patch"};
         if(adminName.current.value!=data.name){newData.name=adminName.current.value}
         if(email.current.value!=data.email){newData.email=email.current.value}
-        if(password.current.value!=data.password){newData.password=password.current.value}
+        if(password.current.value!=""){newData.password=password.current.value}
         
         console.log(newData)
         const submit =axios.post(`${URL}admins/${props.index}`, newData,

@@ -153,7 +153,7 @@ export default function Admins(props) {
                       <div onClick={(e) => props.edit(index)}>
                         <Pen />
                       </div>
-                      <div onClick={(e) => showAlert(true, e.id)}>
+                      <div onClick={(e) => showAlert(true, index)}>
                         <Trash />
                       </div>
                     </td>
