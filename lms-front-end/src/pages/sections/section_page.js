@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from "axios";
 
-export default function section_page() {
+export default function section_page(props) {
   return (
-    <div>section_page</div>
-  )
+    <div>new_section {props.index} <button onClick={props.cancel} >back</button></div>
+    )
+  
 }

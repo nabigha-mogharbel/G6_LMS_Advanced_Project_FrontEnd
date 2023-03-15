@@ -8,25 +8,16 @@ import "./Sidebar.css";
 function Sidebar(props) {
     const isSuper=true;
     let sidebar=useRef();
+    let tab1=useRef();
+    let tab2=useRef();let tab3=useRef();let tab4=useRef();
     const [isVisible, setVisible]=useState(false)
-    function hoverHandler(event, swicther){
-       // console.log(event.target.classList)
-        /*if(event.target.className==="tab tab_active"){
-            event.target.className="tab";
-            console.log(event.target.children)
-            event.target.children[0].className="link"
-        }
-        else if(event.target.className==="tab"){
-            event.target.className="tab tab_active";
-            event.target.children[0].className="link link_active"
-        }*/
+    function hoverHandler(element, swicther){
         if(swicther==="on"){
-            event.target.className="tab tab_active";
-            event.target.children[0].className="link link_active"
+            element.current.className="tab tab_active";
+            element.current.children[0].className="link link_active"
         }else if(swicther==="off"){
-            event.target.className="tab";
-            //console.log(event.target.children)
-            event.target.children[0].className="link"
+            element.current.className="tab";
+            element.current.children[0].className="link"
         }
     }
     function sidebarToggler(){
@@ -39,12 +30,12 @@ function Sidebar(props) {
     return ( <div className="sidebar" ref={sidebar}> 
     <div><img src={logo} id="logo" width="100px"/> {!isVisible&& <img className='toggler' onClick={sidebarToggler} src={menu2} width="20px"/>}{isVisible&& <img className='toggler' onClick={sidebarToggler} src={close} width="20px"/>}</div>
     <div>
-        <div className="tab" onMouseEnter={e => hoverHandler(e,"on")} onMouseLeave={e => hoverHandler(e,"off")}><Link to="/dashboard/classes" className="link"> Classes</Link></div>
-        <div className="tab" onMouseEnter={e => hoverHandler(e,"on")} onMouseLeave={e => hoverHandler(e,"off")}> <Link to="/dashboard/sections" className="link"> Sections</Link></div>
-        <div className="tab" onMouseEnter={e => hoverHandler(e,"on")} onMouseLeave={e => hoverHandler(e,"off")}><Link to="/dashboard/students" className="link"> Students</Link></div>
+        <div className="tab" ref={tab1} onMouseEnter={e => hoverHandler(tab1,"on")} onMouseLeave={e => hoverHandler(tab1,"off")}><Link to="/dashboard/classes" className="link"> Classes</Link></div>
+        <div className="tab" ref={tab2} onMouseEnter={e => hoverHandler(tab2,"on")} onMouseLeave={e => hoverHandler(tab2,"off")}> <Link to="/dashboard/sections" className="link"> Sections</Link></div>
+        <div className="tab" ref={tab3} onMouseEnter={e => hoverHandler(tab3,"on")} onMouseLeave={e => hoverHandler(tab3,"off")}><Link to="/dashboard/students" className="link"> Students</Link></div>
     </div>
     {isSuper&& <> <hr/>
-    <div className="tab" onMouseEnter={e => hoverHandler(e,"on")} onMouseLeave={e=>hoverHandler(e,"off")}><Link to="/dashboard/admins" className="link"> Admins</Link></div>
+    <div className="tab" ref={tab4} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e=>hoverHandler(tab4,"off")}><Link to="/dashboard/admins" className="link"> Admins</Link></div>
     </>
 }
     </div> );

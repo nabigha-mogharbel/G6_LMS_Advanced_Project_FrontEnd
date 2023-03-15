@@ -41,6 +41,9 @@
         width:120px;
         padding-left: 0;
     }
+    .sidebar_full .tab{
+        padding-left: 5px;
+    }
     .tab_hidden{
         display: none;
     }
