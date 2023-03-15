@@ -36,7 +36,7 @@ export default function EditSection(props){
         const URL=process.env.REACT_APP_BASE_URL;
         let newData={"_method":"patch"};
         if(sectionName.current.value!=data.name){newData.name=sectionName.current.value}
-        if(capacity.current.value!=data.capacity){newData.color=capacity.current.value}
+        if(capacity.current.value!=data.capacity){newData.capacity=capacity.current.value}
         if(class_id.current.value!=data.class_id){newData.classid=class_id.current.value}
         console.log(newData)
         const submit =axios.post(`${URL}sections/${props.index}`, newData,
