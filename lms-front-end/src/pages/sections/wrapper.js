@@ -11,7 +11,7 @@ export default function ClassWrapper(props) {
   const [add, setAdd]=useState(false);
   const [edit, setEdit]=useState(false);
   const [dimmed, setDimmed]=useState(false);
-  const [sectionIndex, setSectionIndex]=useState(-1);
+  const [classIndex, setClassIndex]=useState(-1);
   const [isListPage, toggleListPage]=useState(true);
   //const [page, setPage]=useState({list:true, single:false, edit:false, add:false})
   const shaddowHandler=() => {
@@ -39,18 +39,18 @@ export default function ClassWrapper(props) {
     //setPage({...page, edit:true});
     setEdit(!edit)
     shaddowHandler()
-    setSectionIndex(i)
+    setClassIndex(i)
   }
   const toggleSingle=(i)=>{
    // setPage({list:false, single:true, edit:false, add:false});
     toggleListPage(false)
-    setSectionIndex(i)
+    setClassIndex(i)
   }
   return (<div className='dashboard'>
     {isListPage&& <List dimHandler={shaddowHandler} edit={toggleEdit} add={toggleAdd} more={toggleSingle}/>}
-    {!isListPage && <Single index={sectionIndex} dimHandler={shaddowHandler} edit={toggleEdit} cancel={toggleList}/>}
+    {!isListPage && <Single index={classIndex} dimHandler={shaddowHandler} edit={toggleEdit} cancel={toggleList}/>}
     {add && <Popup><Add cancel={toggleAdd}/></Popup>}
-    {edit && <Popup><Edit cancel={toggleEdit} index={sectionIndex} /></Popup>}
+    {edit && <Popup><Edit cancel={toggleEdit} index={classIndex} /></Popup>}
     {dimmed&&<div style={{position:"absolute", zIndex:"11", top:"0", left:"0", width:"100vw", height:"100vh", backgroundColor:"rgba(0,0,0,0.7)"}}> </div>}
     </div>
   )

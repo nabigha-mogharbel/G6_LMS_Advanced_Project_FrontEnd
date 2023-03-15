@@ -1,0 +1,38 @@
+
+
+.report-wrapper{
+    width: 100%;
+}
+.report-container{
+    width: inherit;
+}
+.form-container{
+width: inherit;
+    display: flex;
+justify-content: flex-start;
+gap: 20px;
+margin: 5px;
+padding: 10px;
+border-radius: 5px;
+
+}
+.Date{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+gap: 200px;
+}
+.submit{
+ 
+    width: 100%;
+    padding: 10px;
+    background-color: #8A70D6;
+    border: none;
+    border-radius: 6px; 
+ 
+    
+   
+
+  
+
+}
