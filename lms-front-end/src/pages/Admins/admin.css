@@ -18,7 +18,7 @@ table{
     border-collapse: collapse;
   border-spacing: 0;
   width: calc(100% - 2rem);
-  border: 1px solid #ddd;
+  border: 1px solid #8A70D6;
 }
 .container-col{
     flex-direction: column;

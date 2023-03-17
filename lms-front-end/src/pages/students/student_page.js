@@ -22,7 +22,8 @@ export default function StudentPage(props) {
         });
       },
       function (error) {
-        window.location.assign("/login");
+        // window.location.assign("/login");
+        console.log(error);
       }
     );
   }, []);
