@@ -53,7 +53,7 @@ export default function NewSection(props) {
       <div className="dash-container container-col"><label>SectionName</label><input type="text" name="name" id="className" placeholder="sectionName" ref={sectionNAme}/></div>
       <div className="dash-container container-col"><label>Capacity</label><input type="number" name="name" id="classFloor" placeholder="Capacity" ref={Capacity}/></div>
       <div className="dash-container container-col"><label>Class_id</label><input type="number" name="name" id="classFloor" placeholder="class_id" ref={class_id}/></div>
-      <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button onClick={props.cancel}>Cancel</button>
+      <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button className="cancel" onClick={props.cancel}>Cancel</button>
       </div>
       </form>
     </div>
