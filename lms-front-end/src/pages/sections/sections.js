@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Alert from "../../components/Delete/deleteAlert";
 import Trash from "../../components/Trash/Trash";
 import Pen from "../../components/Pen/Pen";
+import Loader from "../../components/loader";
 export default function Sections(props) {
   let Response = [];
   const [classes, setData] = useState({
@@ -17,6 +18,7 @@ export default function Sections(props) {
     lpl: "",
     npl: "",
     ppl: "",
+    loading: true,
   });
   const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
@@ -44,6 +46,7 @@ export default function Sections(props) {
           lpl: response.data.message.last_page_url,
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
+          loading: false,
         });
       },
       function (error) {
@@ -91,6 +94,8 @@ export default function Sections(props) {
   };
   return (
     <>
+      {classes.loading && <Loader />}{" "}
+      {/* show the Loader component if loading is true */}
       <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
@@ -179,7 +184,7 @@ export default function Sections(props) {
               })}
             </tbody>
           </table>
-          {classes.current_page === 1 && classes.pages>1&&(
+          {classes.current_page === 1 && classes.pages > 1 && (
             <div className="table-paginator">
               <div className="active">1</div>{" "}
               {classes.current_page != classes.pages && (
@@ -190,7 +195,7 @@ export default function Sections(props) {
               </div>
             </div>
           )}
-          {classes.current_page === classes.pages &&classes.pages>1&& (
+          {classes.current_page === classes.pages && classes.pages > 1 && (
             <div className="table-paginator">
               <div onClick={(e) => getClasses(classes.fpl)}>1</div>{" "}
               {classes.current_page != 1 && (
@@ -200,13 +205,16 @@ export default function Sections(props) {
             </div>
           )}
           {classes.current_page != classes.pages &&
-            classes.current_page != 1 &&  classes.pages>1&&(
+            classes.current_page != 1 &&
+            classes.pages > 1 && (
               <div className="table-paginator">
                 <div onClick={(e) => getClasses(classes.fpl)}>1</div>{" "}
                 {classes.current_page != 1 && (
                   <div onClick={(e) => getClasses(classes.ppl)}>&lt;</div>
                 )}{" "}
-                {classes.current_page != 1 && <div className="active">{classes.current_page}</div>}{" "}
+                {classes.current_page != 1 && (
+                  <div className="active">{classes.current_page}</div>
+                )}{" "}
                 {classes.current_page != classes.pages && (
                   <div onClick={(e) => getClasses(classes.npl)}>&gt;</div>
                 )}
@@ -222,7 +230,7 @@ export default function Sections(props) {
             item="class"
             index={alert[1]}
             removeAlert={(e) => showAlert(false, -1)}
-            url='sections/'
+            url="sections/"
           />
         )}
       </div>

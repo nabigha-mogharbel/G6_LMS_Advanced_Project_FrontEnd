@@ -14,7 +14,7 @@ export default function Admins(props) {
 
   let Response = [];
   const [admins, setData] = useState([]);
-  const [sort, setSort] = useState({});
+  // const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
   const search = useRef();
   const filter = useRef();
@@ -30,7 +30,7 @@ export default function Admins(props) {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     const URL = process.env.REACT_APP_BASE_URL;
-    setIsLoading(true); // set loading to true when making the request
+    // setIsLoading(true); // set loading to true when making the request
     const abouzada = axios.get(`${URL}admins`, config).then(
       function (response) {
         console.log("then", response.data.message);
@@ -75,7 +75,7 @@ export default function Admins(props) {
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
         });
-        setIsLoading(false); // set loading to false after the data is fetched
+        // setIsLoading(false); // set loading to false after the data is fetched
       },
       function (error) {
         window.location.assign("/login");
@@ -85,6 +85,7 @@ export default function Admins(props) {
 
   return (
     <>
+      {isLoading && <Loader />}
       <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
@@ -215,6 +216,7 @@ export default function Admins(props) {
           />
         )}
       </div>
+      )
     </>
   );
 }

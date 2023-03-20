@@ -10,11 +10,10 @@ export default function Students() {
   let password = useRef();
   let picture = useRef();
 
-  const [isLoading, setIsLoading] = useState(false); // add state variable for loading
+  const [isLoading, setIsLoading] = useState(true); // add state variable for loading
 
   function handleRequest(e) {
     e.preventDefault();
-    setIsLoading(true); // set loading to true when request is sent
     let data = {
       first_Name: first_Name.current.value,
       last_Name: last_Name.current.value,

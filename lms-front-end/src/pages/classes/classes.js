@@ -11,7 +11,7 @@ import Loader from "../../components/loader"; // import the Loader component
 
 export default function Classes(props) {
   let Response = [];
-  const [loading, setLoading] = useState(false); // state variable to track loading state
+  //const [loading, setLoading] = useState(true); // state variable to track loading state
   const [classes, setData] = useState({
     data: [],
     pages: 0,
@@ -20,6 +20,7 @@ export default function Classes(props) {
     lpl: "",
     npl: "",
     ppl: "",
+    loading: true,
   });
   const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
@@ -37,7 +38,7 @@ export default function Classes(props) {
     };
     const URL = process.env.REACT_APP_BASE_URL;
     const abouzada = axios.get(`${URL}classes`, config).then(
-      setLoading(true), // set loading state to true
+      // set loading state to true
       function (response) {
         console.log(response.data.message);
         setData({
@@ -48,10 +49,12 @@ export default function Classes(props) {
           lpl: response.data.message.last_page_url,
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
+          loading: false,
         });
-        setLoading(false); // set loading state to false
+        // setLoading(false); // set loading state to false
       },
       function (error) {
+        //setData({ ...classes, loading: false }),
         window.location.assign("/login");
       }
     );
@@ -77,7 +80,7 @@ export default function Classes(props) {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     const abouzada = axios.get(url, config).then(
-      setLoading(true), // set loading state to true
+      // set loading state to true
       function (response) {
         console.log(response.data.message);
         setData({
@@ -94,11 +97,11 @@ export default function Classes(props) {
         window.location.assign("/login");
       }
     );
-    setLoading(false); // set loading state to false
+    //setLoading(false); // set loading state to false
   };
   return (
     <>
-      {loading && <Loader />}{" "}
+      {classes.loading && <Loader />}{" "}
       {/* show the Loader component if loading is true */}
       <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
