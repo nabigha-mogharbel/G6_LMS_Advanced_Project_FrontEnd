@@ -1,6 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import Loader from "../../components/loader";
 
 export default function Students() {
   let first_Name = useRef();
@@ -9,8 +10,11 @@ export default function Students() {
   let password = useRef();
   let picture = useRef();
 
+  const [isLoading, setIsLoading] = useState(false); // add state variable for loading
+
   function handleRequest(e) {
     e.preventDefault();
+    setIsLoading(true); // set loading to true when request is sent
     let data = {
       first_Name: first_Name.current.value,
       last_Name: last_Name.current.value,
@@ -35,6 +39,8 @@ export default function Students() {
 
   return (
     <div className="container">
+      {/* conditionally render the Loader component based on the loading state */}
+      {isLoading && <Loader />}
       <div className="student-content">
         <div className="student-form">
           <div className="student-form-title">
@@ -68,10 +74,6 @@ export default function Students() {
               </div>
             </div>
           </form>
-
-          {/* <div className="login-image">
-                  <img src={image} alt="Logo" />
-                </div> */}
         </div>
       </div>
     </div>

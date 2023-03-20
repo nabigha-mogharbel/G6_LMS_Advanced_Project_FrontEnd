@@ -7,8 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 import Alert from "../../components/Delete/deleteAlert";
 import Trash from "../../components/Trash/Trash";
 import Pen from "../../components/Pen/Pen";
+import Loader from "../../components/loader"; // import the Loader component
+
 export default function Classes(props) {
   let Response = [];
+  const [loading, setLoading] = useState(false); // state variable to track loading state
   const [classes, setData] = useState({
     data: [],
     pages: 0,
@@ -34,6 +37,7 @@ export default function Classes(props) {
     };
     const URL = process.env.REACT_APP_BASE_URL;
     const abouzada = axios.get(`${URL}classes`, config).then(
+      setLoading(true), // set loading state to true
       function (response) {
         console.log(response.data.message);
         setData({
@@ -45,6 +49,7 @@ export default function Classes(props) {
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
         });
+        setLoading(false); // set loading state to false
       },
       function (error) {
         window.location.assign("/login");
@@ -72,6 +77,7 @@ export default function Classes(props) {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     const abouzada = axios.get(url, config).then(
+      setLoading(true), // set loading state to true
       function (response) {
         console.log(response.data.message);
         setData({
@@ -88,9 +94,12 @@ export default function Classes(props) {
         window.location.assign("/login");
       }
     );
+    setLoading(false); // set loading state to false
   };
   return (
     <>
+      {loading && <Loader />}{" "}
+      {/* show the Loader component if loading is true */}
       <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
@@ -171,7 +180,7 @@ export default function Classes(props) {
               })}
             </tbody>
           </table>
-          {classes.current_page === 1 && classes.pages>1&&(
+          {classes.current_page === 1 && classes.pages > 1 && (
             <div className="table-paginator">
               <div className="active">1</div>{" "}
               {classes.current_page != classes.pages && (
@@ -182,7 +191,7 @@ export default function Classes(props) {
               </div>
             </div>
           )}
-          {classes.current_page === classes.pages &&classes.pages>1&& (
+          {classes.current_page === classes.pages && classes.pages > 1 && (
             <div className="table-paginator">
               <div onClick={(e) => getClasses(classes.fpl)}>1</div>{" "}
               {classes.current_page != 1 && (
@@ -192,13 +201,16 @@ export default function Classes(props) {
             </div>
           )}
           {classes.current_page != classes.pages &&
-            classes.current_page != 1 &&  classes.pages>1&&(
+            classes.current_page != 1 &&
+            classes.pages > 1 && (
               <div className="table-paginator">
                 <div onClick={(e) => getClasses(classes.fpl)}>1</div>{" "}
                 {classes.current_page != 1 && (
                   <div onClick={(e) => getClasses(classes.ppl)}>&lt;</div>
                 )}{" "}
-                {classes.current_page != 1 && <div className="active">{classes.current_page}</div>}{" "}
+                {classes.current_page != 1 && (
+                  <div className="active">{classes.current_page}</div>
+                )}{" "}
                 {classes.current_page != classes.pages && (
                   <div onClick={(e) => getClasses(classes.npl)}>&gt;</div>
                 )}
