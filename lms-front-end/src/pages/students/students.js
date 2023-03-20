@@ -30,7 +30,9 @@ export default function Students() {
         cookies.set("access_token", response.data.access_token, { path: "/" });
         console.log("Token saved to cookie:", response.data.access_token);
         // redirect to the dashboard or the next page after successful login
+        setIsLoading(false);
       })
+
       .catch((error) => {
         console.log("Error logging in:", error);
         // show error message to the user
