@@ -4,6 +4,8 @@
 }
 .submit{
     height: 10px;
+    
+   
 }
 .Classes-th, .Classes-td{
     padding: 0.6rem 1rem;
@@ -69,6 +71,7 @@ table{
     border: #999 1px solid;
     cursor: pointer;
     padding: 0.6rem 1rem;
+   
     
 }
 .table-paginator div:first-child{
@@ -127,10 +130,26 @@ table{
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    
 }
 
 button.cancel{
-    background-color: yellow;
-    border-radius: 1px;
+    background-color: #FFDB58;
+    border-radius: 10px;
     box-sizing: border-box;
+    border: 3px solid ;
+    height: 36px;
+    width: 117px;
+    border:10px;
 }
+button{
+    
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 3px solid ;
+    height: 36px;
+    width: 117px;
+    border:10px;
+}
+
+

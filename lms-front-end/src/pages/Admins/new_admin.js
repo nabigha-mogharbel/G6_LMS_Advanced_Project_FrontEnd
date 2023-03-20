@@ -83,12 +83,16 @@ export default function New_admin(props) {
             ref={password}
           />
         </div>
+      
         <div className="dash-container container-row dash-form-btn">
           <button type="submit">Submit</button>{" "}
-          <button type="reset">Reset</button>
+          <button  type="reset">Reset</button>
           <button className="cancel" onClick={props.cancel}>Cancel</button>
         </div>
+       
+        
       </form>
+      
     </div>
   );
 }
