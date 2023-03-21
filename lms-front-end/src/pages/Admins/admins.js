@@ -7,16 +7,21 @@ import "react-toastify/dist/ReactToastify.css";
 import Alert from "../../components/Delete/deleteAlert";
 import Trash from "../../components/Trash/Trash";
 import Pen from "../../components/Pen/Pen";
+import Loader from "../../components/loader";
+
 export default function Admins(props) {
+  const [isLoading, setIsLoading] = useState(true);
+
   let Response = [];
   const [admins, setData] = useState([]);
-  const [sort, setSort] = useState({});
+  // const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
   const search = useRef();
   const filter = useRef();
   const floorSort = useRef();
   const idSort = useRef();
   const nameSort = useRef();
+
   //const token = useContext(TokenContext)
   useEffect(() => {
     const cookies = new Cookies();
@@ -25,10 +30,12 @@ export default function Admins(props) {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     const URL = process.env.REACT_APP_BASE_URL;
+    // setIsLoading(true); // set loading to true when making the request
     const abouzada = axios.get(`${URL}admins`, config).then(
       function (response) {
         console.log("then", response.data.message);
         setData(response.data.message);
+        setIsLoading(false); // set loading to false after the data is fetched
       },
       function (error) {
         window.location.assign("/login");
@@ -56,6 +63,7 @@ export default function Admins(props) {
       headers: { Authorization: `Bearer ${authToken}` },
     };
     const abouzada = axios.get(`${URL}admins`, config).then(
+      // setIsLoading(true),
       function (response) {
         console.log(response.data.message);
         setData({
@@ -67,6 +75,7 @@ export default function Admins(props) {
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
         });
+        // setIsLoading(false); // set loading to false after the data is fetched
       },
       function (error) {
         window.location.assign("/login");
@@ -74,10 +83,10 @@ export default function Admins(props) {
     );
   };
 
-    
   return (
     <>
-     
+      {isLoading && <Loader />}
+      <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
@@ -127,8 +136,6 @@ export default function Admins(props) {
                   Email
                 </th>
 
-             
-
                 <th className="Classes-th"></th>
               </tr>
             </thead>
@@ -147,7 +154,7 @@ export default function Admins(props) {
                       <a>{e.name}</a>
                     </td>
                     <td className="Classes-td">{e.email}</td>
-                   
+
                     <td
                       className="Classes-td dash-container container-row"
                       style={{ cursor: "pointer" }}
@@ -207,9 +214,11 @@ export default function Admins(props) {
             item="class"
             index={alert[1]}
             removeAlert={(e) => showAlert(false, -1)}
-            url='admins/'
+            url="admins/"
           />
         )}
       </div>
+      )
     </>
-  )}
+  );
+}

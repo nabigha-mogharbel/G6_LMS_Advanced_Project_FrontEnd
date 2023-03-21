@@ -1,11 +1,14 @@
-import React, { useRef } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
+import React, { useRef, useState } from "react";
+import Loader from "../../components/loader";
+
 export default function New_admin(props) {
   const adminName = useRef();
   const email = useRef();
   const password = useRef();
+  const [loading, setLoading] = useState(false); // added loading state
   const submitAdmins = (e) => {
     e.preventDefault();
     const cookies = new Cookies();
@@ -23,6 +26,7 @@ export default function New_admin(props) {
     const submit = axios.post(`${URL}register`, data, config).then(
       function (response) {
         console.log(response);
+        setLoading(false); // set loading to false after API call is complete
         toast.success("Admin Added!", {
           position: "top-right",
           autoClose: 3000,
@@ -36,6 +40,7 @@ export default function New_admin(props) {
       },
       function (error) {
         console.log(error);
+        setLoading(false); // set loading to false if API call fails
         toast.error("Error Occured. Please Try again", {
           position: "top-right",
           autoClose: 5000,
@@ -52,6 +57,7 @@ export default function New_admin(props) {
   return (
     <div className="new-class">
       <ToastContainer />
+      {loading && <Loader />} {/* conditionally render Loader */}
       <form onSubmit={submitAdmins}>
         <div className="dash-container container-col">
           <label>admin Name</label>
