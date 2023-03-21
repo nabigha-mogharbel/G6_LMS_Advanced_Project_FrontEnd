@@ -41,7 +41,7 @@ export default function Attendance() {
       }
     }
   )
-},[bool])
+},[])
 function createNewRecord(){
   let dateObj=new Date();
   let date=dateObj.toISOString().split('T')[0];
@@ -53,7 +53,8 @@ function createNewRecord(){
     };
   const abouzada=axios.get(URL, config).then(
     function (response) {
-      setBool(!bool);
+      //setBool(!bool);
+      console.log("bbb")
 },
     function (error) {
       ;

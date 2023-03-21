@@ -14,6 +14,8 @@ function Sidebar(props) {
     let sidebar=useRef();
     let tab1=useRef();
     let tab2=useRef();let tab3=useRef();let tab4=useRef();
+    let tab5=useRef();;
+    let tab6=useRef();
     const [isVisible, setVisible]=useState(false)
     function hoverHandler(element, swicther){
         if(swicther==="on"){
@@ -46,15 +48,16 @@ function Sidebar(props) {
         <div className="tab-image">
       <img src={image2} alt="Classes" />
     </div>Students</Link></div>
+    <div className="tab" ref={tab4} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e => hoverHandler(tab4,"off")}><Link to="/dashboard/attendance" className="link"> Attendance</Link></div>
+        <div className="tab" ref={tab5} onMouseEnter={e => hoverHandler(tab5,"on")} onMouseLeave={e => hoverHandler(tab5,"off")}><Link to="/dashboard/report" className="link"> Report</Link></div>
     </div>
     {isSuper&& <> <hr/>
-    <div className="tab" ref={tab4} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e=>hoverHandler(tab4,"off")}><Link to="/dashboard/admins" className="link"> 
+    <div className="tab" ref={tab6} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e=>hoverHandler(tab4,"off")}><Link to="/dashboard/admins" className="link"> 
     <div className="tab-image">
       <img src={admin} alt="Classes" />
-    </div> Admins</Link></div>
-    </>
-}
-    </div> );
+    </div> Admins</Link></div> </>}
+        </div>
+  )
 }
 
 export default Sidebar;

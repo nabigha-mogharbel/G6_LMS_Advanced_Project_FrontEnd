@@ -54,8 +54,8 @@ export default function Classes(props) {
         // setLoading(false); // set loading state to false
       },
       function (error) {
-        //setData({ ...classes, loading: false }),
-        window.location.assign("/login");
+        
+        //window.location.assign("/login");
       }
     );
   }, []);

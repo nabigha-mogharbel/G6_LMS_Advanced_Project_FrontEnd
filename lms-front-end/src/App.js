@@ -10,7 +10,7 @@ import Section from "./pages/sections/wrapper"
 import Admin from "./pages/Admins/wrapper";
 import Container from "./pages/container/index"
 import Attendance from "./pages/Attendance"
-import Report from "./pages/repport"
+import Report from "./pages/report"
 import Dashboard from "./pages/dashboard/dashboard"
 
   function App() {
