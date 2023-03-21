@@ -10,6 +10,8 @@ function Sidebar(props) {
     let sidebar=useRef();
     let tab1=useRef();
     let tab2=useRef();let tab3=useRef();let tab4=useRef();
+    let tab5=useRef();;
+    let tab6=useRef();
     const [isVisible, setVisible]=useState(false)
     function hoverHandler(element, swicther){
         if(swicther==="on"){
@@ -33,9 +35,11 @@ function Sidebar(props) {
         <div className="tab" ref={tab1} onMouseEnter={e => hoverHandler(tab1,"on")} onMouseLeave={e => hoverHandler(tab1,"off")}><Link to="/dashboard/classes" className="link"> Classes</Link></div>
         <div className="tab" ref={tab2} onMouseEnter={e => hoverHandler(tab2,"on")} onMouseLeave={e => hoverHandler(tab2,"off")}> <Link to="/dashboard/sections" className="link"> Sections</Link></div>
         <div className="tab" ref={tab3} onMouseEnter={e => hoverHandler(tab3,"on")} onMouseLeave={e => hoverHandler(tab3,"off")}><Link to="/dashboard/students" className="link"> Students</Link></div>
+        <div className="tab" ref={tab4} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e => hoverHandler(tab4,"off")}><Link to="/dashboard/attendance" className="link"> Attendance</Link></div>
+        <div className="tab" ref={tab5} onMouseEnter={e => hoverHandler(tab5,"on")} onMouseLeave={e => hoverHandler(tab5,"off")}><Link to="/dashboard/report" className="link"> Report</Link></div>
     </div>
     {isSuper&& <> <hr/>
-    <div className="tab" ref={tab4} onMouseEnter={e => hoverHandler(tab4,"on")} onMouseLeave={e=>hoverHandler(tab4,"off")}><Link to="/dashboard/admins" className="link"> Admins</Link></div>
+    <div className="tab" ref={tab6} onMouseEnter={e => hoverHandler(tab6,"on")} onMouseLeave={e=>hoverHandler(tab4,"off")}><Link to="/dashboard/admins" className="link"> Admins</Link></div>
     </>
 }
     </div> );

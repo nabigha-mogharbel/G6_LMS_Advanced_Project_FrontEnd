@@ -47,7 +47,8 @@ export default function Classes(props) {
         });
       },
       function (error) {
-        window.location.assign("/login");
+        
+        //window.location.assign("/login");
       }
     );
   }, []);
