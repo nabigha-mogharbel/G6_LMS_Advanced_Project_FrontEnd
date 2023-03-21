@@ -77,8 +77,11 @@ export default function EditClass(props){
     <div className="dash-container container-col"><label>admin Name</label><input defaultValue={data.name} type="text" name="name" id="className"  placeholder="admin Name" ref={adminName}/></div>
     <div className="dash-container container-col"><label>admin email</label><input defaultValue={data.email} type="email" name="name" id="classFloor" placeholder="email" ref={email}/></div>
     <div className="dash-container container-col"><label>admin password</label><input defaultValue={data.password} type="password" name="name" id="className" placeholder="password" ref={password} /></div>
-    <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button onClick={props.cancel}>Cancel</button>
+    <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button className="cancel" onClick={props.cancel}> Cancel</button>
     </div>
     </form>
-  </div><button onClick={props.cancel}> Cancel</button></div>)
+  </div>
+  {/* <button onClick={props.cancel}> Cancel</button> */}
+  </div>
+  )
 }

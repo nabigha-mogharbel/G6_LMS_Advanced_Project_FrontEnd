@@ -1,12 +1,18 @@
 .Classes-th{
     color:var(--purple);
+   
+}
+.submit{
+    height: 10px;
+    
+   
 }
 .Classes-th, .Classes-td{
     padding: 0.6rem 1rem;
 }
 .dashboard input, .dashboard select{
     border-radius: 6px;
-    border: 1px solid #999;
+    border: 1px solid #8A70D6;;
     padding:0.6rem 1rem;
     height:2rem;
     box-sizing: border-box;
@@ -14,6 +20,27 @@
 .dash-container{
     display: flex;
 }
+.add_button{
+    border-radius: 10px;
+    border: 3px solid #8A70D6;
+    padding: 0.6rem 1rem;
+    height: 2rem;
+    box-sizing: border-box;
+    margin: 20px;   
+    background-color: #8A70D6;
+    height: 36px;
+    width: 217px;
+    /* font-size: larger; */
+    border:none;
+    /* width: 217px;
+    height: 36px;
+    margin: 20px;
+    font-size: larger;
+    border:none;
+    background-color: #8A70D6;
+    border-radius: 10px; */
+   
+    }
 table{
     border-collapse: collapse;
   border-spacing: 0;
@@ -44,6 +71,8 @@ table{
     border: #999 1px solid;
     cursor: pointer;
     padding: 0.6rem 1rem;
+   
+    
 }
 .table-paginator div:first-child{
     border-radius:  6px 0 0 6px;
@@ -56,6 +85,31 @@ table{
     color:white;
 
 }
+#className{
+    margin: 20px;
+    padding: 20px;
+}
+#classFloor{
+    margin: 20px;
+    padding: 20px;
+}
+/* .dash-container container-row dash-form-btn submit {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+} */
+.pop-up .dash-container{
+    /* align-items: end; */
+    justify-content: space-around;
+    /* background-color: #8A70D6; */
+}
+
+
+.dash-container label {
+    margin-left: 20px;
+}
+
 @media screen and (max-width: 768px){
     .container-row-to-col{
         flex-direction: column;
@@ -72,3 +126,30 @@ table{
         }*/
     
 }
+.button-add-container{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    
+}
+
+button.cancel{
+    background-color: #FFDB58;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 3px solid ;
+    height: 36px;
+    width: 117px;
+    border:10px;
+}
+button{
+    
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 3px solid ;
+    height: 36px;
+    width: 117px;
+    border:10px;
+}
+
+

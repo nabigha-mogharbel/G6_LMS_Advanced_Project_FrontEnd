@@ -91,7 +91,7 @@ export default function Sections(props) {
   };
   return (
     <>
-      <button onClick={props.add}>Add</button>
+    
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
@@ -111,7 +111,9 @@ export default function Sections(props) {
               <option value="none">-----</option>
               <option value="floor">Floor</option>
             </select>
+            
           </div>
+          <div className="button-add-container"> <button className="add_button" onClick={props.add}>Add</button></div>
         </div>
         <div className="dash-container-scroll">
           <table className="table">

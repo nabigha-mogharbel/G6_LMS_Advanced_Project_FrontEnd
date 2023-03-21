@@ -76,8 +76,8 @@ export default function EditSection(props){
     <div className="dash-container container-col"><label>Capacity </label><input defaultValue={data.capacity} type="number" name="name" id="classFloor" placeholder="Capacity" ref={capacity}/></div>
     <div className="dash-container container-col"><label>Class_id </label><input defaultValue={data.class_id} type="number" name="name" id="classFloor" placeholder="Class_id" ref={class_id}/></div>
    
-    <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button onClick={props.cancel}>Cancel</button>
+    <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button className="cancel" onClick={props.cancel}>Cancel</button>
     </div>
     </form>
-  </div><button onClick={props.cancel}> Cancel</button></div>)
+  </div></div>)
 }
