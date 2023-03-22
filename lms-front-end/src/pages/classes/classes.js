@@ -21,6 +21,7 @@ export default function Classes(props) {
     npl: "",
     ppl: "",
     loading: true,
+    search:""
   });
   const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
@@ -40,7 +41,6 @@ export default function Classes(props) {
     const abouzada = axios.get(`${URL}classes`, config).then(
       // set loading state to true
       function (response) {
-        console.log(response.data.message);
         setData({
           data: response.data.message.data,
           pages: response.data.message.last_page,
@@ -50,6 +50,7 @@ export default function Classes(props) {
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
           loading: false,
+          search:""
         });
         // setLoading(false); // set loading state to false
       },
@@ -59,18 +60,44 @@ export default function Classes(props) {
       }
     );
   }, []);
-  function searchClassByName() {}
+  function searchClassByName(event) {
+    setData({...classes, search:event.target.value})
+  }
   const showAlert = (bool, index) => {
     setAlert([bool, index]);
     props.dimHandler();
-    console.log("alerterrrr");
   };
   function sortClasses(e, param) {
-    let b = document.getElementsByClassName("Classes-th");
-    for (let i = 0; i < b.length; i++) {
+    //let b = document.getElementsByClassName("Classes-th");
+    /*for (let i = 0; i < b.length; i++) {
       b[i].className = "batata";
-    }
+    }*/
     // e.current.className="Classes-th filtered"
+    let URL=process.env.REACT_APP_BASE_URL+"classes"+param;
+    const cookies = new Cookies();
+    const authToken = cookies.get("access_token");
+    const config = {
+      headers: { Authorization: `Bearer ${authToken}` },
+    };
+    const abouzada = axios.get(URL, config).then(
+      // set loading state to true
+      function (response) {
+        setData({
+          data: response.data.message.data,
+          pages: response.data.message.last_page,
+          current_page: response.data.message.current_page,
+          fpl: response.data.message.first_page_url,
+          lpl: response.data.message.last_page_url,
+          npl: response.data.message.next_page_url,
+          ppl: response.data.message.prev_page_url,
+          search:""
+        });
+      },
+      function (error) {
+        window.location.assign("/login");
+      }
+    );
+   
   }
   function filterClass(param) {}
   const getClasses = (url) => {
@@ -82,7 +109,6 @@ export default function Classes(props) {
     const abouzada = axios.get(url, config).then(
       // set loading state to true
       function (response) {
-        console.log(response.data.message);
         setData({
           data: response.data.message.data,
           pages: response.data.message.last_page,
@@ -91,6 +117,7 @@ export default function Classes(props) {
           lpl: response.data.message.last_page_url,
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
+          search:""
         });
       },
       function (error) {
@@ -103,7 +130,8 @@ export default function Classes(props) {
     <>
       {classes.loading && <Loader />}{" "}
       {/* show the Loader component if loading is true */}
-      <button onClick={props.add}>Add</button>
+      <h1>Classes</h1>
+      <hr className="title-hr"/>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
@@ -117,13 +145,13 @@ export default function Classes(props) {
               ref={search}
             />
           </div>
-          <div className="dash-container container-col">
+          {/*<div className="dash-container container-col form-element">
             <label htmlFor="filter">Filter</label>
             <select onChange={filterClass} id="filter" ref={filter}>
               <option value="none">-----</option>
               <option value="floor">Floor</option>
             </select>
-          </div>
+  </div>*/}
           <div className="button-add-container"> <button className="add_button" onClick={props.add}>Add</button></div>
 
         </div>
@@ -134,21 +162,21 @@ export default function Classes(props) {
                 <th
                   className="Classes-th"
                   ref={idSort}
-                  onClick={(e) => sortClasses(idSort, "id")}
+                  onClick={(e) => sortClasses(idSort, "")}
                 >
                   #
                 </th>
                 <th
                   className="Classes-th"
                   ref={nameSort}
-                  onClick={(e) => sortClasses(nameSort, "name")}
+                  onClick={(e) => sortClasses(nameSort, "/sort/name")}
                 >
                   Class
                 </th>
                 <th
                   className="Classes-th"
                   ref={floorSort}
-                  onClick={(e) => sortClasses(floorSort, "floor")}
+                  onClick={(e) => sortClasses(floorSort, "/sort/floor")}
                 >
                   Floor
                 </th>
@@ -156,10 +184,10 @@ export default function Classes(props) {
               </tr>
             </thead>
             <tbody>
-              {classes.data.map((e) => {
+              {classes.data.filter(b => b.name.includes(classes.search)).map((e) => {
                 let index = e.id;
                 return (
-                  <tr className="Classes-tr gray" key={e.id}>
+                  <tr className="Classes-tr gray" key={index}>
                     <td className="Classes-td">{e.id}</td>
                     <td
                       className="Classes-td"
@@ -176,7 +204,7 @@ export default function Classes(props) {
                       <div onClick={(e) => props.edit(index)}>
                         <Pen />
                       </div>
-                      <div onClick={(e) => showAlert(true, e.id)}>
+                      <div onClick={(e) => showAlert(true, index)}>
                         <Trash />
                       </div>
                     </td>
@@ -230,6 +258,7 @@ export default function Classes(props) {
             dimHandler={props.dimHandler}
             item="class"
             index={alert[1]}
+            url="classes/"
             removeAlert={(e) => showAlert(false, -1)}
           />
         )}

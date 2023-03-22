@@ -22,7 +22,6 @@ export default function NewClass(props) {
      config
     )
       .then(function (response) {
-       console.log(response);
         toast.success('Class Added!', {
           position: "top-right",
           autoClose: 3000,
@@ -35,8 +34,7 @@ export default function NewClass(props) {
           });
        
       }, function(error){
-        console.log(error);
-        toast.error('Error Occured. Please Try again', {
+        toast.error(error.message, {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,
@@ -53,7 +51,7 @@ export default function NewClass(props) {
       <div className="dash-container container-col"><label>Class Name</label><input type="text" name="name" id="className" placeholder="Class Name" ref={className}/></div>
       <div className="dash-container container-col"><label>Class Floor</label><input type="number" name="name" id="classFloor" placeholder="Class Floor" ref={floorNumber}/></div>
       <div className="dash-container container-col"><label>Class Color</label><input type="color" name="name" id="className" placeholder="Class Name" ref={classColor} /></div>
-      <div className="dash-container container-row dash-form-btn"><button type="submit">Submit</button> <button type="reset">Reset</button>       <button className="cancel" onClick={props.cancel}>Cancel</button>
+      <div className="dash-container container-row dash-form-btn"><button type="submit" className="add_button">Submit</button> <button type="reset">Reset</button>       <button className="cancel" onClick={props.cancel}>Cancel</button>
       </div>
       </form>
     </div>

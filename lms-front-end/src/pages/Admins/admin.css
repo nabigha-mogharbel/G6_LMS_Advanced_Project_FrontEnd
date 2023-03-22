@@ -4,8 +4,6 @@
 }
 .submit{
     height: 10px;
-    
-   
 }
 .Classes-th, .Classes-td{
     padding: 0.6rem 1rem;
@@ -14,7 +12,7 @@
     border-radius: 6px;
     border: 1px solid #8A70D6;;
     padding:0.6rem 1rem;
-    height:2rem;
+    height:2.5rem;
     box-sizing: border-box;
 }
 .dash-container{
@@ -22,16 +20,16 @@
 }
 .add_button{
     border-radius: 10px;
-    border: 3px solid #8A70D6;
+    /*border: 3px solid #8A70D6;*/
     padding: 0.6rem 1rem;
     height: 2rem;
     box-sizing: border-box;
-    margin: 20px;   
+    /*margin: 20px;*/   
     background-color: #8A70D6;
-    height: 36px;
-    width: 217px;
+
     /* font-size: larger; */
     border:none;
+    color:white;
     /* width: 217px;
     height: 36px;
     margin: 20px;
@@ -74,6 +72,10 @@ table{
    
     
 }
+.table-controllers{
+    margin-bottom:2rem;
+    column-gap:1rem;
+}
 .table-paginator div:first-child{
     border-radius:  6px 0 0 6px;
 }
@@ -85,14 +87,7 @@ table{
     color:white;
 
 }
-#className{
-    margin: 20px;
-    padding: 20px;
-}
-#classFloor{
-    margin: 20px;
-    padding: 20px;
-}
+
 /* .dash-container container-row dash-form-btn submit {
     display: flex;
     justify-content: space-between;
@@ -109,10 +104,26 @@ table{
 .dash-container label {
     margin-left: 20px;
 }
-
+@media screen and (min-width: 769px){
+.table-wrapper{
+    width:90%;
+}
+.table-wrapper>div:first-child, .table-wrapper>div:nth-child(2){
+    width:100%
+}
+.table-controllers{
+    align-items: flex-end;
+}
+table{
+    width:100%;
+    border-radius: 10px;
+}
+}
 @media screen and (max-width: 768px){
     .container-row-to-col{
         flex-direction: column;
+        row-gap:1rem;
+        width:80%;
     }
     .table-container-scroll{
         overflow-x: auto;
@@ -134,13 +145,10 @@ table{
 }
 
 button.cancel{
-    background-color: #FFDB58;
+    background-color: var(--orange);
     border-radius: 10px;
     box-sizing: border-box;
-    border: 3px solid ;
-    height: 36px;
-    width: 117px;
-    border:10px;
+
 }
 button{
     

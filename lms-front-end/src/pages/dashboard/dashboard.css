@@ -25,16 +25,20 @@
     .dashboard{
         height:100vh;
         width:calc(100vw - 240px);
+        padding-top:4rem
     }
 }
 @media screen and (max-width: 480px){
     .dashboard{
-        margin-left: 40px;
+        margin-left: 60px;
+    }
+    .table-wrapper{
+        width:80%
     }
 }
 
 @media screen and (max-width:768px) and (min-width:481px) {
     .dashboard{
-        margin-left: 40px;
+        margin-left: 5rem;
     }
 }

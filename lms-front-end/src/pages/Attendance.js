@@ -41,7 +41,7 @@ export default function Attendance() {
       }
     }
   )
-},[])
+},[bool])
 function createNewRecord(){
   let dateObj=new Date();
   let date=dateObj.toISOString().split('T')[0];
@@ -54,7 +54,6 @@ function createNewRecord(){
   const abouzada=axios.get(URL, config).then(
     function (response) {
       //setBool(!bool);
-      console.log("bbb")
 },
     function (error) {
       ;
@@ -76,11 +75,15 @@ function editRecord(id, status){
     )
 }
 function filterByClass(e){
-  if(e.target.value==="null"){setBool(!bool)}
+  if(e.target.value==="null"){
+    //window.location.reload()
+    setBool(!bool)
+  
+  }
   else{
   let dateObj=new Date();
   let date=dateObj.toISOString().split('T')[0];
-  let URL=process.env.REACT_APP_BASE_URL+`attendance/class/${e.target.value}/start-date/${date}/end-date/${date}`;
+  let URL=process.env.REACT_APP_BASE_URL+`attendance/class/${e.target.value}/date/${date}`;
   const cookies = new Cookies();
     const authToken = cookies.get("access_token");
     const config = {
@@ -93,7 +96,8 @@ function filterByClass(e){
     )}
 }
 function filterBySection(e){
-  if(e.target.value==="null"){setBool(!bool)}
+  if(e.target.value==="null"){    setBool(!bool)
+  }
   else{
   let dateObj=new Date();
   let date=dateObj.toISOString().split('T')[0];
@@ -110,24 +114,28 @@ function filterBySection(e){
     )}
 }
  return (
-    <div><ToastContainer/>
+    <div className="dashboard"><ToastContainer/>
+          <h1>Attendance</h1>
+      <hr className="title-hr"/>
         <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
-            <label htmlFor="class">Search</label>
+          <label htmlFor="class">Search</label>
             <input
               type="text"
               placeholder="Class Name"
               name="class"
               id="search"
             />
-          </div>
-          <div className="dash-container container-col">
+            </div>
+            <div className="dash-container container-col">
             <label htmlFor="class-filter">Class</label>
             <select  id="class-filter" defaultValue={data.classFilter} onChange={event => filterByClass(event)}>
               <option value="null">---</option>
               {data.classes.map(e => {return <option  key={e.id}value={e.id}>{e.name}</option>})}
             </select>
+            </div>
+            <div className="dash-container container-col">
             <label htmlFor="section-filter">Section</label>
             <select  id="section-filter" defaultValue={data.sectionFilter} onChange={event => filterBySection(event)}>
               <option value="null">---</option>

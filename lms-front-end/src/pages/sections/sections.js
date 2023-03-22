@@ -37,7 +37,6 @@ export default function Sections(props) {
     const URL = process.env.REACT_APP_BASE_URL;
     const abouzada = axios.get(`${URL}sections`, config).then(
       function (response) {
-        console.log(response.data.message);
         setData({
           data: response.data.message.data,
           pages: response.data.message.last_page,
@@ -47,6 +46,7 @@ export default function Sections(props) {
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
           loading: false,
+          search:""
         });
       },
       function (error) {
@@ -54,18 +54,38 @@ export default function Sections(props) {
       }
     );
   }, []);
-  function searchClassByName() {}
+  function searchClassByName(e) {
+    setData({...classes, search:e.target.value})
+  }
   const showAlert = (bool, index) => {
     setAlert([bool, index]);
     props.dimHandler();
-    console.log("alerterrrr");
   };
   function sortClasses(e, param) {
-    let b = document.getElementsByClassName("Classes-th");
-    for (let i = 0; i < b.length; i++) {
-      b[i].className = "batata";
-    }
-    // e.current.className="Classes-th filtered"
+    const cookies = new Cookies();
+    const authToken = cookies.get("access_token");
+    const config = {
+      headers: { Authorization: `Bearer ${authToken}` },
+    };
+    const URL = process.env.REACT_APP_BASE_URL+"sections"+param;
+    const abouzada = axios.get(URL, config).then(
+      function (response) {
+        setData({
+          data: response.data.message.data,
+          pages: response.data.message.last_page,
+          current_page: response.data.message.current_page,
+          fpl: response.data.message.first_page_url,
+          lpl: response.data.message.last_page_url,
+          npl: response.data.message.next_page_url,
+          ppl: response.data.message.prev_page_url,
+          loading: false,
+          search:""
+        });
+      },
+      function (error) {
+        window.location.assign("/login");
+      }
+    )
   }
   function filterClass(param) {}
   const getClasses = (url) => {
@@ -76,7 +96,6 @@ export default function Sections(props) {
     };
     const abouzada = axios.get(url, config).then(
       function (response) {
-        console.log(response.data.message);
         setData({
           data: response.data.message.data,
           pages: response.data.message.last_page,
@@ -85,6 +104,7 @@ export default function Sections(props) {
           lpl: response.data.message.last_page_url,
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
+          search:""
         });
       },
       function (error) {
@@ -96,8 +116,9 @@ export default function Sections(props) {
     <>
     
       {classes.loading && <Loader />}{" "}
+      <h1>Sections</h1>
+      <hr className="title-hr"/>
       {/* show the Loader component if loading is true */}
-      <button onClick={props.add}>Add</button>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
@@ -128,28 +149,28 @@ export default function Sections(props) {
                 <th
                   className="Classes-th"
                   ref={idSort}
-                  onClick={(e) => sortClasses(idSort, "id")}
+                  onClick={(e) => sortClasses(idSort, "")}
                 >
                   #
                 </th>
                 <th
                   className="Classes-th"
                   ref={nameSort}
-                  onClick={(e) => sortClasses(nameSort, "name")}
+                  onClick={(e) => sortClasses(nameSort, "/sort/name")}
                 >
                   Name
                 </th>
                 <th
                   className="Classes-th"
                   ref={floorSort}
-                  onClick={(e) => sortClasses(floorSort, "floor")}
+                  onClick={(e) => sortClasses(floorSort, "/sort/capacity")}
                 >
                   Capacity
                 </th>
                 <th
                   className="Classes-th"
                   ref={floorSort}
-                  onClick={(e) => sortClasses(floorSort, "floor")}
+                  onClick={(e) => sortClasses(floorSort, "/sort/class")}
                 >
                   Class
                 </th>
@@ -157,7 +178,7 @@ export default function Sections(props) {
               </tr>
             </thead>
             <tbody>
-              {classes.data.map((e) => {
+              {classes.data.filter(b => b.name.includes(classes.search)).map((e) => {
                 let index = e.id;
                 return (
                   <tr className="Classes-tr gray" key={e.id}>
@@ -170,7 +191,7 @@ export default function Sections(props) {
                       <a>{e.name}</a>
                     </td>
                     <td className="Classes-td">{e.capacity}</td>
-                    <td className="Classes-td">{e.class_id}</td>
+                    <td className="Classes-td">{e.class.name}</td>
                     <td
                       className="Classes-td dash-container container-row"
                       style={{ cursor: "pointer" }}

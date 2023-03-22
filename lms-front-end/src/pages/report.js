@@ -24,7 +24,7 @@ export default function Repport() {
         }
     }
 })
-const [filters,setFilters]=useState({withClass:false, class:"0", classes:[], sections:[], withSection:false, section:"0", data:[]})
+const [filters,setFilters]=useState({withClass:false, class:"0", classes:[], sections:[], withSection:false, section:"0", stuData:[], stats:[]})
   React.useEffect(()=>{
     let URL=process.env.REACT_APP_BASE_URL+`reportlists`;
   const cookies = new Cookies();
@@ -50,7 +50,7 @@ const [filters,setFilters]=useState({withClass:false, class:"0", classes:[], sec
       setFilters({...filters, withClass:false, class:"0"});
   }
   else{
-    let URL=process.env.REACT_APP_BASE_URL+`attendance/class/1`;
+    let URL=process.env.REACT_APP_BASE_URL+`attendance/report/class/${event.target.value}`;
     const cookies = new Cookies();
       const authToken = cookies.get("access_token");
       const config = {
@@ -58,8 +58,8 @@ const [filters,setFilters]=useState({withClass:false, class:"0", classes:[], sec
       };
     const abouzada=axios.get(URL, config).then(
       function (response) {
-        console.log("bb",response.data.Attendance)
-        setFilters({...filters, withSection:true, section:event.target.value, data:response.data.Attendance});
+        console.log("bb",response.data.total)
+        setFilters({...filters, withSection:true, section:event.target.value, class:event.target.value,stuData:response.data.Attendance, stats:response.data.total});
       },
       function (error) {
         if(error.response.status===401){
@@ -75,11 +75,15 @@ const [filters,setFilters]=useState({withClass:false, class:"0", classes:[], sec
     setFilters({...filters, withSection:false, section:"0"});
 }
 else{
-  setFilters({...filters, withSection:true, section:event.target.value});}
-}
+  //setFilters({...filters, withSection:true, section:event.target.value});}
+}}
   return (
-    <div>
-      <div className='report-controllers'>
+    <div className="dashboard">
+            <h1>Reports</h1>
+      <hr className="title-hr"/>
+      <div className="table-wrapper">
+      <div className='table-controllers dash-container container-row-to-col'>
+      <div className="dash-container container-col">
         <label htmlFor='class'>Class</label>
         <select id="class" defaultValue={filters.class} onChange={classFilter}>
           <option value="0">----</option>
@@ -88,6 +92,8 @@ else{
 
         }
         </select>
+        </div>
+        <div className="dash-container container-col">
         <label htmlFor='section'>Section</label>
        {filters.withClass &&<select id="section" defaultValue={filters.section} onChange={sectionFilter}>
         <option value="0">----</option>
@@ -98,38 +104,52 @@ else{
           return <option value={index} key={e} >{filters.sections[e].name}</option>}})
 }
         </select>}
-        {!filters.withClass&&<select id="section" disabled><option value="0">----</option></select>}
+        {!filters.withClass&&<select id="section" disabled><option value="0">----</option></select>}</div>
                 
       </div>
-  <table>
+      <div className='dash-container-scroll'>
+  <table className='table'>
   <thead>
-    <th>
+    <tr className="Classes-tr">
+    <th className="Classes-th">
       Student Id
     </th>
-    <th>
+    <th className="Classes-th">
       Student Name
     </th>
-    <th>
+    <th className="Classes-th">
       Present
     </th>
-    <th>
+    <th className="Classes-th">
       Late
-    </th><th>
+    </th><th className="Classes-th">
       Absent
-    </th><th>
+    </th><th className="Classes-th">
       Unknown
     </th>
+    </tr>
   </thead>
   <tbody>
-  {filters.data.map(e => {return <tr>
-    <td>{e.student_id}</td>
-    <td>{e.student_name}</td>
-    <td>{e.present} {Number.parseFloat(e.avrP).toFixed(2)}%</td>
-    <td>{e.absent}{Number.parseFloat(e.avrA).toFixed(2)}%</td>
-    <td>{e.late} {Number.parseFloat(e.avrL).toFixed(2)}%</td>
+  {filters.stuData.map(e => {return <tr className="Classes-tr" key={e.student_id}>
+    <td className="Classes-td">{e.student_id}</td>
+    <td className="Classes-td">{e.student_name}</td>
+    <td className="Classes-td">{e.present}{`   (${Number.parseFloat(e.avrP*100).toFixed(1)} %)`}</td>
+    <td className="Classes-td">{e.absent}{`  (${Number.parseFloat(e.avrA*100).toFixed(1)} %)`}</td>
+    <td className="Classes-td">{e.late}  {`  (${Number.parseFloat(e.avrL*100).toFixed(1)} %)`}</td>
+    <td className="Classes-td">{e.null} {`  (${Number.parseFloat(e.avrN*100).toFixed(1)} %)`}</td>
+  </tr>})}
+  {filters.stats.map(e => {return <tr key={e.section_id}>
+    <td>{}</td>
+    <td>{filters.sections[`${e.section_id}`].name}</td>
+    <td>{Number.parseFloat(e.null).toFixed(1)}</td>
+    <td>{Number.parseFloat(e.absent).toFixed(1)}</td>
+    <td>{Number.parseFloat(e.late).toFixed(1)}</td>
+    <td>{Number.parseFloat(e.null).toFixed(1)}</td>
   </tr>})}
   </tbody>
   </table>
+  </div>
+  </div>
     </div>
   )
 }

@@ -13,7 +13,7 @@ export default function Admins(props) {
   const [isLoading, setIsLoading] = useState(true);
 
   let Response = [];
-  const [admins, setData] = useState([]);
+  const [admins, setData] = useState({data:[], search:""});
   // const [sort, setSort] = useState({});
   const [alert, setAlert] = useState([false, -1]);
   const search = useRef();
@@ -34,7 +34,7 @@ export default function Admins(props) {
     const abouzada = axios.get(`${URL}admins`, config).then(
       function (response) {
         console.log("then", response.data.message);
-        setData(response.data.message);
+        setData({...admins, data:response.data.message});
         setIsLoading(false); // set loading to false after the data is fetched
       },
       function (error) {
@@ -42,7 +42,10 @@ export default function Admins(props) {
       }
     );
   }, []);
-  function searchClassByName() {}
+  function searchClassByName(event) {
+    setData({...admins, search:event.target.value})
+
+  }
   const showAlert = (bool, index) => {
     setAlert([bool, index]);
     props.dimHandler();
@@ -74,6 +77,7 @@ export default function Admins(props) {
           lpl: response.data.message.last_page_url,
           npl: response.data.message.next_page_url,
           ppl: response.data.message.prev_page_url,
+          search:""
         });
         // setIsLoading(false); // set loading to false after the data is fetched
       },
@@ -86,7 +90,8 @@ export default function Admins(props) {
   return (
     <>
       {isLoading && <Loader />}
-      <button onClick={props.add}>Add</button>
+      <h1>Attendance</h1>
+      <hr className="title-hr"/>
       <div className="table-wrapper">
         <div className="table-controllers dash-container container-row-to-col">
           <div className="dash-container container-col">
@@ -141,7 +146,7 @@ export default function Admins(props) {
             </thead>
             <tbody>
               {console.log(admins)}
-              {admins.map((e) => {
+              {admins.data.filter(b => b.name.includes(admins.search)).map((e) => {
                 let index = e.id;
                 return (
                   <tr className="Classes-tr gray" key={e.id}>
@@ -218,7 +223,7 @@ export default function Admins(props) {
           />
         )}
       </div>
-      )
+      
     </>
   );
 }

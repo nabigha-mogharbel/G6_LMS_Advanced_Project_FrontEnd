@@ -56,6 +56,12 @@ table{
     color:white;
 
 }
+.title-hr{
+    margin-bottom:2rem
+}
+.table-paginator{
+    margin-top:1rem
+}
 @media screen and (max-width: 768px){
     .container-row-to-col{
         flex-direction: column;

@@ -2,9 +2,8 @@ import Cookies from "universal-cookie";
 import {useState, useRef, useEffect} from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-
+import Popup from "../../components/popup/Popup"
 export default function EditSection(props){
-    console.log("idex wlaaaa", props.index)
     const [data,setData]=useState({});
     const sectionName=useRef();
     const capacity=useRef();
@@ -21,7 +20,6 @@ export default function EditSection(props){
          config,
         )
           .then(function (response) {
-            console.log(response.data.message)
             setData(response.data.message[0])
           }, function(error){});
       },
@@ -38,12 +36,10 @@ export default function EditSection(props){
         if(sectionName.current.value!=data.name){newData.name=sectionName.current.value}
         if(capacity.current.value!=data.capacity){newData.capacity=capacity.current.value}
         if(class_id.current.value!=data.class_id){newData.classid=class_id.current.value}
-        console.log(newData)
         const submit =axios.post(`${URL}sections/${props.index}`, newData,
          config
         )
           .then(function (response) {
-           console.log(response);
             toast.success('Section Updated!', {
               position: "top-right",
               autoClose: 3000,
@@ -57,7 +53,6 @@ export default function EditSection(props){
               //window.location.reload();
            
           }, function(error){
-            console.log(error);
             toast.error('Error Occured. Please Try again', {
             position: "top-right",
             autoClose: 5000,

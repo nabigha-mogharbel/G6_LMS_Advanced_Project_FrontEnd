@@ -2,8 +2,8 @@
   position: absolute;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
-  border-top: 16px solid blue;
-  border-bottom: 16px solid blue;
+  border-top: 16px solid var(--orange);
+  border-bottom: 16px solid var(--orange);
   width: 120px;
   height: 120px;
   top: 30%;

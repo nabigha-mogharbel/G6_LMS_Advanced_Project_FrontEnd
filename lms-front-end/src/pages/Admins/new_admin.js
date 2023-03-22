@@ -91,7 +91,7 @@ export default function New_admin(props) {
         </div>
       
         <div className="dash-container container-row dash-form-btn">
-          <button type="submit">Submit</button>{" "}
+          <button type="submit" className="add_button">Submit</button>{" "}
           <button  type="reset">Reset</button>
           <button className="cancel" onClick={props.cancel}>Cancel</button>
         </div>

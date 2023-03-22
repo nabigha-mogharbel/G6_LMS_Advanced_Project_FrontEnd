@@ -4,7 +4,6 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function EditClass(props){
-    console.log("idex wlaaaa", props.index)
     const [data,setData]=useState({});
     const className=useRef();
     const floorNumber=useRef();
@@ -21,7 +20,6 @@ export default function EditClass(props){
          config,
         )
           .then(function (response) {
-            console.log(response.data.message)
             setData(response.data.message[0])
            
           }, function(error){});
@@ -44,7 +42,6 @@ export default function EditClass(props){
          config
         )
           .then(function (response) {
-           console.log(response);
             toast.success('Class Updated!', {
               position: "top-right",
               autoClose: 3000,
@@ -58,8 +55,7 @@ export default function EditClass(props){
               window.location.reload();
            
           }, function(error){
-            console.log(error);
-            toast.error('Error Occured. Please Try again', {
+            toast.error(error.message, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: true,

@@ -25,7 +25,7 @@ export default function DeleteAlert(props){
             
            }, function(error){
              console.log(error);
-             toast.error('Error Occured. Please Try again', {
+             toast.error(error.message, {
              position: "top-right",
              autoClose: 5000,
              hideProgressBar: true,
@@ -45,7 +45,7 @@ export default function DeleteAlert(props){
             <ToastContainer/>
             {console.log("alert")}
            <p> Are you sure you want to delete this {props.item} {props.index}?</p>
-           <div className="delete-controllers"> <button onClick={deleteSection}>Yes</button> <button onClick={cancel}>Cancel</button></div>
+           <div className="delete-controllers"> <button onClick={deleteSection} className="add_button">Yes</button> <button onClick={cancel} className="cancel">Cancel</button></div>
         </div>
     )
 }

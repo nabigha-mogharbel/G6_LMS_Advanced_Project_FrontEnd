@@ -7,9 +7,9 @@
     height: 400px;
     position: absolute;
     z-index: 12;
-    left: calc(50vw - 120px);
-    top: calc(50vh - 120px);
-    overflow: scroll;
+    left: calc(50vw - 20px);
+    top: calc(50vh - 200px);
+    overflow: auto;
     background-color: white;
     justify-content: center;
 
